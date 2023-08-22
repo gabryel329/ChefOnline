@@ -24,14 +24,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 #PEDIDO
-Route::get('/index', [PedidoController::class, 'index'])->name('pedidos.index');
-
+Route::get('/pedido', [PedidoController::class, 'index'])->name('pedidos.index');
 Route::get('/pedido/create', [PedidoController::class, 'create'])->name('pedidos.create');
-Route::post('/pedido', [PedidoController::class, 'store'])->name('pedidos.store');
+Route::post('/pedido/store', [PedidoController::class, 'store'])->name('pedidos.store');
 Route::get('/pedido/checkout/{pedido}', [PedidoController::class, 'showCheckoutForm'])->name('pedido.checkout');
-Route::post('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheckout'])->name('pedido.process_checkout');
-Route::put('/pedido/{pedido}/processCheckout', [PedidoController::class, 'processCheckout'])->name('pedido.processCheckout');
-Route::delete('/pedidos/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
+Route::put('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheckout'])->name('pedido.processCheckout');
+Route::delete('/pedido/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
+
+
 
 
 

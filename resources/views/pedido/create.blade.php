@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-<link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-
 @section('content')
     <div class="main-item">
         <div class="container">
@@ -14,12 +8,27 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <h1 class="text-center">MENU</h1>
-                            <form id="pedido-form" method="POST">
+                            <form action="{{ route('pedidos.store') }}" method="POST">
                                 @csrf
                                 <div class="row product-list">
-                                    <!-- Os produtos serão preenchidos aqui via AJAX -->
+                                    @foreach ($produtos as $produto)
+                                        <div class="col-md-6 mb-3">
+                                            <div class="card product-card">
+                                                <div class="card-body">
+                                                    <div class="circle">
+                                                        <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}">
+                                                    </div>
+                                                    <label class="text-center"><strong>R${{ $produto->preco }},00</strong></label>
+                                                    <input type="hidden" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
+                                                    <label for="{{ $produto->id }}" class="text-center">{{ $produto->nome }}</label>
+                                                    <input style="text-align: center" type="number" name="produtos[{{ $produto->id }}][quantidade]" class="form-control quantity-input" min="0" >
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block" id="avancar-btn" disabled>AVANÇAR</button>
+                                <button type="submit" class="btn btn-primary btn-block" id="avancar-btn" disabled>AVANÇAR</button>
                             </form>
                         </div>
                     </div>
@@ -30,36 +39,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                url: '{{ route('pedidos.create') }}', // Substitua pelo URL correto para listar os produtos
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    // Preencha o formulário com os produtos listados
-                    var productList = $('.product-list');
-                    $.each(data.produtos, function (index, produto) {
-                        productList.append(
-                            '<div class="col-md-6 mb-3">' +
-                            '<div class="card product-card">' +
-                            '<div class="card-body">' +
-                            '<div class="circle">' +
-                            '<img src="URL_DA_IMAGEM_DO_PRODUTO" alt="' + produto.nome + '">' +
-                            '</div>' +
-                            '<label class="text-center"><strong>R$' + produto.preco + ',00</strong></label>' +
-                            '<input type="hidden" name="produtos[' + produto.id + '][id]" value="' + produto.id + '">' +
-                            '<label for="' + produto.id + '" class="text-center">' + produto.nome + '</label>' +
-                            '<input style="text-align: center" type="number" name="produtos[' + produto.id + '][quantidade]" class="form-control quantity-input" min="0">' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                    });
-
-                    // Após preencher os produtos, ativar o botão se houver produtos selecionados
-                    $('.quantity-input').trigger('change');
-                }
-            });
-
             $('.quantity-input').on('change', function () {
                 var quantity = parseInt($(this).val());
 
@@ -78,7 +57,6 @@
             });
         });
     </script>
-
     <style>
         .circle {
             background: rgba(15, 28, 63, 0.125);

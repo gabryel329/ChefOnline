@@ -68,6 +68,7 @@
                                                         <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $produto->id }}">Excluir</button>
                                                     </form>
                                                 </td>
+
                                             </tr>
                                         @endif
                                     @endforeach
@@ -77,12 +78,11 @@
                             <div class="total">
                                 <span style="float: right; text-align: right;">
                                     <div class="thin dense">TOTAL</div>
-                                    <div id="total" class="thin dense">R${{ $pedido->total }},00</div>
+                                    <div id="total" class="thin dense">R${{ $total }},00</div>
                                 </span>
                             </div>
                             <br>
                             <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
-
                         </div>
                     </div>
                 </div>
@@ -131,29 +131,28 @@
             align-items: center;
         }
     </style>
-
     <script>
         $(document).ready(function () {
-            $('.btn-delete').on('click', function (event) {
-                event.preventDefault();
-                var deleteForm = $(this).closest('form');
-                var totalElement = $('#total'); // O elemento que exibe o total
+    $('.btn-delete').on('click', function (event) {
+        event.preventDefault();
+        var deleteForm = $(this).closest('form');
+        var totalElement = $('#total'); // O elemento que exibe o total
 
-                $.ajax({
-                    url: deleteForm.attr('action'),
-                    type: 'DELETE',
-                    dataType: 'json',
-                    data: deleteForm.serialize(),
-                    success: function (data) {
-                        // Atualize o valor do total com o novo valor retornado
-                        totalElement.text('R$' + data.total + ',00');
+        $.ajax({
+            url: deleteForm.attr('action'),
+            type: 'DELETE',
+            dataType: 'json',
+            data: deleteForm.serialize(),
+            success: function (data) {
+                // Atualize o valor do total com o novo valor retornado
+                totalElement.text('R$' + data.total + ',00');
 
-                        // Remova a linha da tabela após a exclusão
-                        deleteForm.closest('tr').remove();
-                    }
-                });
-            });
+                // Remova a linha da tabela após a exclusão
+                deleteForm.closest('tr').remove();
+            }
         });
+    });
+});
 
     </script>
 @endsection

@@ -9,78 +9,69 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // $pedidos = Pedido::all();
-
-        // return view('pedido.create', compact('pedidos'));
+        $pedidos = Pedido::all();
+        return view('pedido.index', compact('pedidos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $produtos = Produto::all();
-
         return view('pedido.create', compact('produtos'));
     }
 
     public function store(Request $request)
-    {
-        $data = [];
+{
+    $data = [];
 
-        $total = 0;
+    $total = 0;
 
-        foreach ($request->produtos as $produto) {
-            $prod = Produto::find($produto['id']);
-            $total += $prod->preco * $produto['quantidade'];
+    foreach ($request->produtos as $produtoId => $produtoData) {
+        $prod = Produto::find($produtoId);
+        $total += $prod->preco * $produtoData['quantidade'];
+    }
+
+    $data['total'] = $total;
+
+    $pedido = Pedido::create($data);
+
+    foreach ($request->produtos as $produtoId => $produtoData) {
+        $quantidade = $produtoData['quantidade'];
+
+        if ($quantidade > 0) { // Verifique se a quantidade é maior que 0 antes de adicionar ao pedido
+            $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
         }
-
-        $data['total'] = $total;
-
-        $pedido = Pedido::create($data);
-
-        foreach ($request->produtos as $produto) {
-            $pedido->produtos()->attach($produto['id'], ['quantidade' => $produto['quantidade']]);
-        }
-
-        return response()->json(['message' => 'Pedido criado com sucesso', 'pedido_id' => $pedido->id]);
-    }
-    public function showCheckoutForm($pedido)
-    {
-        $pedido = Pedido::findOrFail($pedido);
-        $formasPagamento = FormaPagamento::all();
-        $produtos = $pedido->produtos;
-        $total = $pedido->total;
-
-        return response()->json([
-            'pedido' => $pedido,
-            'formasPagamento' => $formasPagamento,
-            'produtos' => $produtos,
-            'total' => $total
-        ]);
     }
 
-    public function processCheckout(Request $request, $pedido)
-    {
-        $pedido = Pedido::findOrFail($pedido);
 
-        $pedido->update([
-            'nome' => $request->nome,
-            'cpf' => $request->cpf,
-            'telefone' => $request->telefone,
-            'forma_pagamento_id' => $request->forma_pagamento_id,
-        ]);
+    return redirect()->route('pedido.checkout', ['pedido' => $pedido->id]);
+}
 
-        // Retorne uma resposta JSON com uma mensagem de sucesso
-        return response()->json([
-            'message' => 'Pedido concluído com sucesso!'
-        ]);
-    }
+
+public function showCheckoutForm($pedido)
+{
+    $pedido = Pedido::findOrFail($pedido);
+    $formasPagamento = FormaPagamento::all();
+    $produtos = $pedido->produtos;
+    $total = $pedido->total;
+
+    return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total'));
+}
+
+public function processCheckout(Request $request, $pedido)
+{
+    $pedido = Pedido::findOrFail($pedido);
+
+    $pedido->update([
+        'nome' => $request->nome,
+        'cpf' => $request->cpf,
+        'telefone' => $request->telefone,
+        'forma_pagamento_id' => $request->forma_pagamento_id,
+    ]);
+
+    return redirect()->route('home')->with('success', 'Pedido concluído com sucesso!');
+}
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
     {
@@ -90,23 +81,8 @@ class PedidoController extends Controller
         // Remova o produto do pedido
         $pedido->produtos()->detach($produtoRemover->id);
 
-        // Retorne uma resposta JSON com uma mensagem de sucesso
-        return response()->json([
-            'message' => 'Produto removido com sucesso do pedido.'
-        ]);
+        return redirect()->back()->with('success', 'Produto removido com sucesso do pedido.');
     }
-
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pedido $pedido)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
