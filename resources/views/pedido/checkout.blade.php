@@ -4,20 +4,19 @@
 
 <section class="book_section layout_padding">
     <div class="container">
-        <div class="heading_container">
-            <h2>
-                Finalize o Pedido
-            </h2>
+        <div class="heading_container heading_center">
+            <h2><img style="width: 30%; height: 20%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
-        <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <h3>DADOS DO CLIENTE</h3>
-                <div class="form_container">
+                <div class="heading_container">
+                    <h2>Dados do Cliente</h2>
+                </div>
+                <div class="form_container rounded p-4" style="background-color: white;">
                     <form action="{{ route('pedido.processCheckout', ['pedido' => $pedido->id]) }}" method="POST">
                         @csrf
                         <div>
-                            <input type="text" name="nome" class="form-control" placeholder="Seu Name" />
+                            <input type="text" name="nome" class="form-control" placeholder="Seu Nome" />
                         </div>
                         <div>
                             <input type="text" name="telefone" class="form-control" placeholder="Telefone" />
@@ -26,26 +25,24 @@
                             <input type="text" name="cpf" class="form-control" placeholder="CPF" />
                         </div>
                         <div>
-                            <select  name="forma_pagamento_id" class="form-control nice-select wide">
-                                <option value="" disabled selected>
-                                    Escolha
-                                </option>
-                                    @foreach ($formasPagamento as $formaPagamento)
-                                        <option value="{{ $formaPagamento->id }}">{{ $formaPagamento->nome }}</option>
-                                    @endforeach
+                            <select name="forma_pagamento_id" class="form-control nice-select wide">
+                                <option value="" disabled selected>Escolha</option>
+                                @foreach ($formasPagamento as $formaPagamento)
+                                    <option value="{{ $formaPagamento->id }}">{{ $formaPagamento->nome }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="btn_box">
-                            <button type="submit" class="btn btn-danger">
-                                Finalizar
-                            </button>
+                        <div class="btn_box mt-4">
+                            <button type="submit" class="btn btn-danger">Finalizar</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-md-6">
-                <h3>RESUMO DO PEDIDO</h3>
-                <div class="form_container">
+                <div class="heading_container">
+                    <h2>Detalhes do Pedido</h2>
+                </div>
+                <div class="form_container rounded p-4" style="background-color: white;">
                     <table class="order-table">
                         <tbody>
                             @foreach ($pedido->produtos as $produto)
@@ -53,19 +50,19 @@
                                     <tr>
                                         <td>
                                             <div class="img-box">
-                                                <img style="border-radius: 10px" src="{{ asset('images/' . $produto->imagem) }}" alt="{{ $produto->nome }}">
+                                                <img style="border-radius: 10px;" src="{{ asset('images/' . $produto->imagem) }}" alt="{{ $produto->nome }}" width="70" height="70">
                                             </div>
                                         </td>
                                         <td>
-                                            <br>
-                                            <span class="thin">{{ $produto->nome }}</span>
-                                            <br>
-                                            <span class="thin small">PREÇO: R${{ $produto->preco }},00</span>
-                                            <br>
-                                            <span class="thin small">PORÇÃO: {{ $produto->pivot->quantidade }}</span>
-                                        </td>
-                                        <td>
-                                            <div class="price">SUBTOTAL: R${{ $produto->preco * $produto->pivot->quantidade }},00</div>
+                                            <div>
+                                                <span class="thin"><strong>{{ $produto->nome }}</strong></span>
+                                                <br>
+                                                <span class="thin small">PREÇO: R${{ $produto->preco }},00</span>
+                                                <br>
+                                                <span class="thin small">PORÇÕES: {{ $produto->pivot->quantidade }}</span>
+                                                <br>
+                                                <span class="thin small"><strong>SUBTOTAL: R${{ $produto->preco * $produto->pivot->quantidade }},00</strong></span>
+                                            </div>
                                         </td>
                                         <td>
                                             <form action="{{ route('pedido.removeProduto', ['pedido' => $pedido->id, 'produto' => $produto->id]) }}" method="POST">
@@ -74,7 +71,6 @@
                                                 <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $produto->id }}">Excluir</button>
                                             </form>
                                         </td>
-
                                     </tr>
                                 @endif
                             @endforeach
@@ -82,12 +78,14 @@
                     </table>
                     <div class="line"></div>
                     <div class="total">
-                        <span style="float: right; text-align: right;">
-                            <div class="thin dense">TOTAL</div>
+                        <div class="text-center">
+                            <div class="thin dense" style="color: red"><strong>TOTAL</strong></div>
                             <div id="total" name="total" class="thin dense">R${{ $total }},00</div>
-                        </span>
+                        </div>
                     </div>
                 </div>
+                <br>
+                <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
             </div>
         </div>
     </div>
@@ -115,7 +113,6 @@
             });
         });
     });
-
 </script>
 
 @endsection
