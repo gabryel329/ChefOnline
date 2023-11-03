@@ -1,5 +1,5 @@
 
-  <header>
+  {{-- <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top header-gradient">
       <div class="container-fluid">
         <a class="navbar-brand me-auto" href="/home">ChefOnline</a>
@@ -30,4 +30,4 @@
         </div>
       </div>
     </nav>
-  </header>
+  </header> --}}

@@ -11,67 +11,62 @@ class PedidoController extends Controller
 {
     public function index()
     {
-        $pedidos = Pedido::all();
-        return view('pedido.index', compact('pedidos'));
-    }
-
-    public function create()
-    {
         $produtos = Produto::all();
         return view('pedido.create', compact('produtos'));
     }
 
     public function store(Request $request)
-{
-    $data = [];
+    {
+        $data = [];
 
-    $total = 0;
+        $total = 0;
 
-    foreach ($request->produtos as $produtoId => $produtoData) {
-        $prod = Produto::find($produtoId);
-        $total += $prod->preco * $produtoData['quantidade'];
-    }
-
-    $data['total'] = $total;
-
-    $pedido = Pedido::create($data);
-
-    foreach ($request->produtos as $produtoId => $produtoData) {
-        $quantidade = $produtoData['quantidade'];
-
-        if ($quantidade > 0) { // Verifique se a quantidade é maior que 0 antes de adicionar ao pedido
-            $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
+        foreach ($request->produtos as $produtoId => $produtoData) {
+            $prod = Produto::find($produtoId);
+            $total += $prod->preco * $produtoData['quantidade'];
         }
+
+        $data['total'] = $total;
+
+        $pedido = Pedido::create($data);
+
+        foreach ($request->produtos as $produtoId => $produtoData) {
+            $quantidade = $produtoData['quantidade'];
+
+            if ($quantidade > 0) { // Verifique se a quantidade é maior que 0 antes de adicionar ao pedido
+                $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
+            }
+        }
+
+
+        return redirect()->route('pedido.checkout', ['pedido' => $pedido->id]);
     }
 
 
-    return redirect()->route('pedido.checkout', ['pedido' => $pedido->id]);
-}
+    public function showCheckoutForm($pedido)
+    {
+        $pedido = Pedido::findOrFail($pedido);
+        $formasPagamento = FormaPagamento::all();
+        $produtos = $pedido->produtos;
+        $total = $pedido->total;
 
+        return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total'));
+    }
 
-public function showCheckoutForm($pedido)
-{
-    $pedido = Pedido::findOrFail($pedido);
-    $formasPagamento = FormaPagamento::all();
-    $produtos = $pedido->produtos;
-    $total = $pedido->total;
+    public function processCheckout(Request $request, $pedido)
+    {
+        $pedido = Pedido::findOrFail($pedido);
 
-    return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total'));
-}
+        $pedido->update([
+            'nome' => $request->nome,
+            'cpf' => $request->cpf,
+            'telefone' => $request->telefone,
+            'forma_pagamento_id' => $request->forma_pagamento_id,
+            'total' => $request->total,
+        ]);
 
-public function processCheckout(Request $request, $pedido)
-{
-    $pedido = Pedido::findOrFail($pedido);
-
-    $pedido->update([
-        'nome' => $request->nome,
-        'cpf' => $request->cpf,
-        'telefone' => $request->telefone,
-        'forma_pagamento_id' => $request->forma_pagamento_id,
-    ]);
-
-    return redirect()->route('home')->with('success', 'Pedido concluído com sucesso!');
-}
+        return redirect()->route('home')->with('success', 'Pedido concluído com sucesso!');
+    }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
     {

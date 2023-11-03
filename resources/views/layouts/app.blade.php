@@ -1,157 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ChefOnline</title>
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <!-- Site Metas -->
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="shortcut icon" href="images/favicon.png" type="">
 
-    {{-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
-    <link href="{{ asset('resources/css/carousel.css') }}" rel="stylesheet">
-    <link href="{{ asset('resources/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <title> ChefOnline </title>
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
+        <!--owl slider stylesheet -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+        <!-- nice select  -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+        <!-- font awesome style -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
 
-        /* Estilo personalizado para os círculos vermelho e amarelo */
-        .bg-red {
-            background-color: #ff0000;
-        }
+        <!-- Custom styles for this template -->
+        <link href="css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="css/responsive.css" rel="stylesheet" />
 
-        .bg-yellow {
-            background-color: #ffcc00;
-        }
+        @stack('css')
 
-        /* Degradê de vermelho para amarelo no header */
-        .header-gradient {
-            background: linear-gradient(to right, #ff0000, #ffcc00);
-        }
+    </head>
 
-        /* Estilos para o item do main */
-        .main-item {
-            color: black;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            text-align: center;
-            margin-top: 100px;
-        }
+    <body class="elegant-background">
 
-        .main-item svg {
-            width: 400px;
-            height: 400px;
-        }
+        @php
+            @session_start();
+        @endphp
 
-        .main-item h2 {
-            margin-top: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-family: 'Ubuntu', sans-serif;
-        }
+        @auth
+            @include('layouts.header')
+        @endauth
 
-        .main-item a.btn {
-            background-color: #ff0000;
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+        @yield('content')
 
-        /* .footer {
-        text-align: center;
-        padding: 20px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background-color: #f8f9fa; Adicione uma cor de fundo ao footer
-        } */
-        /* Estilo personalizado para o dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+         <!-- jQery -->
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <!-- popper js -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <!-- bootstrap js -->
+        <script src="js/bootstrap.js"></script>
+        <!-- owl slider -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+        </script>
+        <!-- isotope js -->
+        <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+        <!-- nice select -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+        <!-- custom js -->
+        <script src="js/custom.js"></script>
+        <!-- Google Map -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+        </script>
+        <!-- End Google Map -->
 
-        .dropbtn {
-            background-color: #ff0000;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 25px;
-        }
+        @stack('scripts')
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #ffcc00;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            right: 0;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ff0000;
-            color: white;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .elegant-background {
-            background-color: #f0f0f0;
-            position: relative;
-        }
-    </style>
-
-    @stack('css')
-</head>
-
-<body class="elegant-background">
-
-    @php
-        @session_start();
-    @endphp
-
-    @auth
-        @include('layouts.header')
-    @endauth
-
-    @yield('content')
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
-    @stack('scripts')
-</body>
+    </body>
 
 </html>
