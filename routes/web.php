@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('pedido.create');
 });
 
 Auth::routes();
@@ -24,9 +24,7 @@ Auth::routes();
 #PEDIDO
 
 
-Route::middleware(['auth', 'checkUserRole:Admin'])->group(function () {
-    Route::get('/home', [PedidoController::class, 'index'])->name('pedidos.index');
-});
+Route::get('/', [PedidoController::class, 'index'])->name('pedidos.index');
 
 Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
     Route::get('/lista/{status?}', [PedidoController::class, 'lista'])->name('pedidos.lista');
@@ -38,7 +36,7 @@ Route::get('/pedido/checkout/{pedido}', [PedidoController::class, 'showCheckoutF
 Route::post('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheckout'])->name('pedido.processCheckout');
 Route::delete('/pedido/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
 
-Route::put('/pedidos/{pedido}', [PedidoController::class, 'updateLista'])->name('pedido.updateLista');
+Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
 
 
 

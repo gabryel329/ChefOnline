@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     public function index()
     {
         $produtos = Produto::all();
@@ -100,14 +106,21 @@ class PedidoController extends Controller
          return view('pedido.lista', compact('pedidos', 'statuses'));
      }
 
+     public function update(Request $request, $id)
+     {
+         $pedido = Pedido::find($id);
 
+         if ($pedido) {
+             $pedido->status_id = $request->input('status_id');
+             $pedido->save();
 
+             // Lide com a resposta AJAX, se necessário
+             return response()->json(['message' => 'Status atualizado com sucesso']);
+         }
 
-    public function updateLista(Request $request, Pedido $pedido)
-    {
-        $pedido->update($request->only('status_id'));
-        return redirect()->route('pedidos.lista')->with('success', 'Pedido atualizado com sucesso.');
-    }
+         return response()->json(['error' => 'Pedido não encontrado'], 404);
+     }
+
 
 
     /**

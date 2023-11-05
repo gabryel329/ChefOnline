@@ -1,33 +1,25 @@
-
-  {{-- <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top header-gradient">
-      <div class="container-fluid">
-        <a class="navbar-brand me-auto" href="/home">ChefOnline</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-            <li class="nav-item dropdown">
-              <div class="dropdown">
-                <button class="dropbtn">Menu</button>
-                <div class="dropdown-content">
-					<a href="#">Lista dos Pedidos</a>
-					<a href="#">Relatorios</a>
-					<a href="#">Lista Negra</a>
-					<a class="dropdown-item" href="{{ route('logout') }}"
-						onclick="event.preventDefault();
-								 document.getElementById('logout-form').submit();">
-					{{ __('Logout') }}
-					</a>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-						@csrf
-					</form>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header> --}}
+{{--
+<header>
+    <button href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();" id="botao-canto-superior-direito">
+        Sair
+    </button>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</header>
+<style>
+/* Estilo para o botão no canto superior direito */
+#botao-canto-superior-direito {
+    position: fixed;
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    padding: 10px;
+    background-color: #e25a5a; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    border: none;
+    cursor: pointer;
+    border-radius: 10%;
+}
+</style> --}}
