@@ -23,6 +23,7 @@
                         </div>
                         <div>
                             <input type="text" name="cpf" class="form-control" placeholder="CPF" />
+                            <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
                         </div>
                         <div>
                             <select name="forma_pagamento_id" class="form-control nice-select wide">
@@ -32,8 +33,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div>
+                            <textarea name="obs" id="obs" class="form-control" placeholder="Informe onde você se encontra na praça"></textarea>
+                        </div>
                         <div class="btn_box mt-4">
-                            <button type="submit" class="btn btn-danger">Finalizar</button>
+                            <button id="finalizarButton" type="button" class="btn btn-danger">Finalizar</button>
                         </div>
                     </form>
                 </div>
@@ -57,20 +61,20 @@
                                             <div>
                                                 <span class="thin"><strong>{{ $produto->nome }}</strong></span>
                                                 <br>
-                                                <span class="thin small">PREÇO: R${{ $produto->preco }},00</span>
+                                                <span class="thin small">Preço: R${{ $produto->preco }},00</span>
                                                 <br>
-                                                <span class="thin small">PORÇÕES: {{ $produto->pivot->quantidade }}</span>
+                                                <span id="qtd" class="thin small">Porções: {{ $produto->pivot->quantidade }}</span>
                                                 <br>
-                                                <span class="thin small"><strong>SUBTOTAL: R${{ $produto->preco * $produto->pivot->quantidade }},00</strong></span>
+                                                <span class="thin small"><strong>Subtotal: R${{ $produto->preco * $produto->pivot->quantidade }},00</strong></span>
                                             </div>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <form action="{{ route('pedido.removeProduto', ['pedido' => $pedido->id, 'produto' => $produto->id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $produto->id }}">Excluir</button>
                                             </form>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endif
                             @endforeach
@@ -92,27 +96,57 @@
 </section>
 
 <script>
-    $(document).ready(function () {
-        $('.btn-delete').on('click', function (event) {
-            event.preventDefault();
-            var deleteForm = $(this).closest('form');
-            var totalElement = $('#total'); // O elemento que exibe o total
+    document.addEventListener('DOMContentLoaded', function() {
+        var finalizarButton = document.getElementById('finalizarButton');
+        var form = document.querySelector('form');
 
-            $.ajax({
-                url: deleteForm.attr('action'),
-                type: 'DELETE',
-                dataType: 'json',
-                data: deleteForm.serialize(),
-                success: function (data) {
-                    // Atualize o valor do total com o novo valor retornado
-                    totalElement.text('R$' + data.total + ',00');
+        finalizarButton.addEventListener('click', function() {
+            // Submeta o formulário
+            form.submit();
 
-                    // Remova a linha da tabela após a exclusão
-                    deleteForm.closest('tr').remove();
+            // Aguarde um curto período de tempo (pode precisar ser ajustado)
+            setTimeout(function() {
+                var nome = document.querySelector('input[name="nome"]').value;
+                var telefone = document.querySelector('input[name="telefone"]').value;
+                var cpf = document.querySelector('input[name="cpf"]').value;
+                var obs = document.querySelector('textarea[name="obs"]').value;
+                var formaPagamento = document.querySelector('select[name="forma_pagamento_id"]').options[document.querySelector('select[name="forma_pagamento_id"]').selectedIndex].text;
+                var produtosInfo = "";
+
+                // Obtém detalhes dos produtos
+                var produtos = document.querySelectorAll('.order-table tr');
+                produtos.forEach(function(produto) {
+                    var nomeProduto = produto.querySelector('strong').textContent;
+                    var quantidade = produto.querySelector('span[id="qtd"]').textContent.split(": ")[1];
+                    var subtotal = produto.querySelector('.thin.small strong').textContent;
+
+                    produtosInfo += `*${nomeProduto}*\nQuantidade: *${quantidade}*\n${subtotal}\n\n`;
+                });
+
+                if (nome && telefone && cpf) {
+                    var message = "*Camarão da Praça*\n\n";
+                    message += "Olá, gostaria de fazer um pedido.\n\n";
+                    message += produtosInfo;
+                    message += "*Total:* " + document.getElementById('total').textContent + "\n";
+                    message += "*Forma de Pagamento:* " + formaPagamento + "\n\n";
+                    message += "*ENTREGA:*\n";
+                    message += obs + "\n\n";
+                    message += "*Nome:* " + nome + "\n";
+                    message += "*Telefone:* " + telefone;
+
+                    var recipientPhoneNumber = '71986082537';
+                    var encodedMessage = encodeURIComponent(message);
+                    var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
+
+                    // Abra o WhatsApp em uma nova aba
+                    window.open(whatsappURL, '_blank');
+                } else {
+                    alert('Preencha todos os campos antes de finalizar o pedido.');
                 }
-            });
+            }, 500); // Espere 500 milissegundos (0,5 segundos) após a submissão do formulário
         });
     });
 </script>
+
 
 @endsection

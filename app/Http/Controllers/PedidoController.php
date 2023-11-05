@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\FormaPagamento;
 use App\Models\Pedido;
 use App\Models\Produto;
+use App\Models\Status;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -61,11 +63,13 @@ class PedidoController extends Controller
             'nome' => $request->nome,
             'cpf' => $request->cpf,
             'telefone' => $request->telefone,
+            'obs' => $request->obs,
+            'status_id' => '1',
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'total' => $request->total,
         ]);
 
-        return redirect()->route('home')->with('success', 'Pedido concluído com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido concluído com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
@@ -81,18 +85,30 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pedido $pedido)
+
+     public function lista($status = null)
+     {
+         $statuses = Status::all();
+         $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today());
+
+         if ($status !== null) {
+             $pedidosQuery->where('status_id', $status);
+         }
+
+         $pedidos = $pedidosQuery->get();
+
+         return view('pedido.lista', compact('pedidos', 'statuses'));
+     }
+
+
+
+
+    public function updateLista(Request $request, Pedido $pedido)
     {
-        //
+        $pedido->update($request->only('status_id'));
+        return redirect()->route('pedidos.lista')->with('success', 'Pedido atualizado com sucesso.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pedido $pedido)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

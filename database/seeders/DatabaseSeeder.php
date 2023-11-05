@@ -31,16 +31,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //STATUS
+
+        DB::table('status')->insert([
+            'nome' => 'EM ANDAMENTO',
+        ]);
+
         DB::table('status')->insert([
             'nome' => 'FEITO',
         ]);
 
         DB::table('status')->insert([
             'nome' => 'DELETADO',
-        ]);
-
-        DB::table('status')->insert([
-            'nome' => 'EM ANDAMENTO',
         ]);
 
         //FORMA PAGAMENTO

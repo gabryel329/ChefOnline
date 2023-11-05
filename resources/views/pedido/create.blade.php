@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+@if(session('error'))
+<div style="text-align: center" class="alert alert-warning">
+    {{ session('error') }}
+</div>
+@endif
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
