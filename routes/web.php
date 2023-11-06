@@ -15,27 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pedido.create');
-});
+// Route::get('/', function () {
+//     return view('pedido.create');
+// });
 
 Auth::routes();
 
 #PEDIDO
-
-
 Route::get('/', [PedidoController::class, 'index'])->name('pedidos.index');
-
 Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
     Route::get('/lista/{status?}', [PedidoController::class, 'lista'])->name('pedidos.lista');
 });
-
-
 Route::post('/pedido/store', [PedidoController::class, 'store'])->name('pedidos.store');
 Route::get('/pedido/checkout/{pedido}', [PedidoController::class, 'showCheckoutForm'])->name('pedido.checkout');
 Route::post('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheckout'])->name('pedido.processCheckout');
 Route::delete('/pedido/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
-
 Route::put('/pedidos/{id}', [PedidoController::class, 'update'])->name('pedido.update');
 
 
