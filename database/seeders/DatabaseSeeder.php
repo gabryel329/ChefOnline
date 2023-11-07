@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('produto')->insert([
-            'nome' => 'Kibeo',
+            'nome' => 'Kibe',
             'preco' => '15',
             'descricao' => '12 UND',
             'imagem' => 'Kibe.jpg',
