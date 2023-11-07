@@ -24,6 +24,7 @@
                         <div>
                             <input type="text" name="cpf" class="form-control" placeholder="CPF" />
                             <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
+                            <input style="display: none" name="id" id="id" class="form-control" value="{{ $pedido->id }}" />
                         </div>
                         <div>
                             <select name="forma_pagamento_id" class="form-control nice-select wide">
@@ -61,11 +62,11 @@
                                             <div>
                                                 <span class="thin"><strong>{{ $produto->nome }}</strong></span>
                                                 <br>
-                                                <span class="thin small">Preço: R${{ $produto->preco }},00</span>
+                                                <span class="small">Preço: R${{ $produto->preco }},00</span>
                                                 <br>
-                                                <span id="qtd" class="thin small">Porções: {{ $produto->pivot->quantidade }}</span>
+                                                <span id="qtd">Porções: {{ $produto->pivot->quantidade }}</span>
                                                 <br>
-                                                <span class="thin small"><strong>Subtotal: R${{ $produto->preco * $produto->pivot->quantidade }},00</strong></span>
+                                                <span class="thin small">Subtotal: R${{ $produto->preco * $produto->pivot->quantidade }},00</span>
                                             </div>
                                         </td>
                                         {{-- <td>
@@ -95,55 +96,55 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var finalizarButton = document.getElementById('finalizarButton');
-        var form = document.querySelector('form');
+    $(document).ready(function() {
+        var form = $('form');
 
-        finalizarButton.addEventListener('click', function() {
-            // Submeta o formulário
-            form.submit();
+        $('#finalizarButton').on('click', function() {
+            var nome = $('input[name="nome"]').val();
+            var telefone = $('input[name="telefone"]').val();
+            var cpf = $('input[name="cpf"]').val();
+            var obs = $('textarea[name="obs"]').val();
+            var formaPagamento = $('select[name="forma_pagamento_id"] option:selected').text();
 
-            // Aguarde um curto período de tempo (pode precisar ser ajustado)
-            setTimeout(function() {
-                var nome = document.querySelector('input[name="nome"]').value;
-                var telefone = document.querySelector('input[name="telefone"]').value;
-                var cpf = document.querySelector('input[name="cpf"]').value;
-                var obs = document.querySelector('textarea[name="obs"]').value;
-                var formaPagamento = document.querySelector('select[name="forma_pagamento_id"]').options[document.querySelector('select[name="forma_pagamento_id"]').selectedIndex].text;
-                var produtosInfo = "";
+            if (nome && telefone && cpf) {
+                var message = "*Camarão da Praça*\n\n";
+                message += "Olá, segue pedido *#" + $('#id').val() + "*\n\n";
 
-                // Obtém detalhes dos produtos
-                var produtos = document.querySelectorAll('.order-table tr');
-                produtos.forEach(function(produto) {
-                    var nomeProduto = produto.querySelector('strong').textContent;
-                    var quantidade = produto.querySelector('span[id="qtd"]').textContent.split(": ")[1];
-                    var subtotal = produto.querySelector('.thin.small strong').textContent;
+                // Construa a parte da mensagem com detalhes dos produtos aqui
+                var produtosInfo = "*Produtos*:\n";
+                $('.order-table tbody tr').each(function() {
+                    var nomeProduto = $(this).find('strong').text();
+                    var quantidade = $(this).find('span[id="qtd"]').text().split(": ")[1];
+                    var subtotal = $(this).find('.thin.small').text();
 
-                    produtosInfo += `*${nomeProduto}*\nQuantidade: *${quantidade}*\n${subtotal}\n\n`;
+                    produtosInfo += nomeProduto + "\nQuantidade: " + quantidade + "\n" + subtotal + "\n\n";
                 });
 
-                if (nome && telefone && cpf) {
-                    var message = "*Camarão da Praça*\n\n";
-                    message += "Olá, gostaria de fazer um pedido.\n\n";
-                    message += produtosInfo;
-                    message += "*Total:* " + document.getElementById('total').textContent + "\n";
-                    message += "*Forma de Pagamento:* " + formaPagamento + "\n\n";
-                    message += "*ENTREGA:*\n";
-                    message += obs + "\n\n";
-                    message += "*Nome:* " + nome + "\n";
-                    message += "*Telefone:* " + telefone;
+                message += produtosInfo;
+                message += "*Total:* " + $('#total').text() + "\n";
+                message += "*Forma de Pagamento:* " + formaPagamento + "\n\n";
+                message += "*ENTREGA:*\n";
+                message += obs + "\n\n";
+                message += "*Nome:* " + nome + "\n";
+                message += "*Telefone:* " + telefone;
 
-                    var recipientPhoneNumber = '71986082537';
-                    var encodedMessage = encodeURIComponent(message);
-                    var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
+                var recipientPhoneNumber = '71986082537';
+                var encodedMessage = encodeURIComponent(message);
+                var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
 
-                    // Abra o WhatsApp em uma nova aba
-                    window.open(whatsappURL, '_blank');
-                } else {
-                    alert('Preencha todos os campos antes de finalizar o pedido.');
-                }
-            }, 500); // Espere 500 milissegundos (0,5 segundos) após a submissão do formulário
+                // Abra o WhatsApp em uma nova aba
+                window.open(whatsappURL, '_blank');
+
+                // Aguarde um segundo e depois envie o formulário
+                setTimeout(function() {
+                    form.submit();
+                }, 1000);
+            } else {
+                alert('Preencha todos os campos antes de finalizar o pedido.');
+            }
         });
     });
 </script>

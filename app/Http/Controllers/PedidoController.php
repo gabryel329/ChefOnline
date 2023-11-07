@@ -75,7 +75,7 @@ class PedidoController extends Controller
             'total' => $request->total,
         ]);
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido concluído com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluído com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
