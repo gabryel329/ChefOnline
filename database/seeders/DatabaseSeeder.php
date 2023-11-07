@@ -16,17 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //USER
-        $user = new User();
-        $user->name = 'Admin';
-        $user->tipo = 'Admin';
-        $user->email = 'admin@sualoja.com';
-        $user->password = bcrypt('12345678');
-        $user->save();
 
         DB::table('users')->insert([
             'name' => 'Client',
             'tipo' => 'Client',
-            'email' => 'client@sualoja.com',
+            'email' => 'clientes@lista.com',
             'password' => bcrypt('12345678'),
         ]);
 
@@ -59,6 +53,35 @@ class DatabaseSeeder extends Seeder
 
         DB::table('forma_pagamento')->insert([
             'nome' => 'DINHEIRO',
+        ]);
+
+        //PRODUTOS
+        DB::table('produto')->insert([
+            'nome' => 'Camarão c/ Queijo',
+            'preco' => '16',
+            'descricao' => '8 UND',
+            'imagem' => 'CamaraoQueijo.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Kibeo',
+            'preco' => '15',
+            'descricao' => '12 UND',
+            'imagem' => 'Kibe.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Camarão na Tapioca',
+            'preco' => '18',
+            'descricao' => '8 UND',
+            'imagem' => 'CamaraoTapioca.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Camarão Empanado',
+            'preco' => '15',
+            'descricao' => '8 UND',
+            'imagem' => 'CamaraoEmpanado.jpg',
         ]);
     }
 }
