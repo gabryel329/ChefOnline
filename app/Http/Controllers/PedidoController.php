@@ -95,7 +95,8 @@ class PedidoController extends Controller
     public function lista($status = null)
     {
         $statuses = Status::all();
-        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today());
+        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('cpf');
+
         $statusSelecionado = $status ?? 1; // Defina o status selecionado, usando o valor padrão 1 se nenhum estiver definido.
 
         if ($status !== null) {
