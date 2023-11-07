@@ -16,7 +16,6 @@
         <div class="heading_container heading_center">
             <h2><img style="width: 40%; height: 30%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
-        <br>
         <div class="filters-content">
             <form action="{{ route('pedidos.store') }}" method="POST">
                 @csrf

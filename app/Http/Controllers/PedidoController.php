@@ -92,19 +92,20 @@ class PedidoController extends Controller
      * Show the form for editing the specified resource.
      */
 
-     public function lista($status = null)
-     {
-         $statuses = Status::all();
-         $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today());
+    public function lista($status = null)
+    {
+        $statuses = Status::all();
+        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today());
+        $statusSelecionado = $status ?? 1; // Defina o status selecionado, usando o valor padrão 1 se nenhum estiver definido.
 
-         if ($status !== null) {
-             $pedidosQuery->where('status_id', $status);
-         }
+        if ($status !== null) {
+            $pedidosQuery->where('status_id', $status);
+        }
 
-         $pedidos = $pedidosQuery->get();
+        $pedidos = $pedidosQuery->get();
 
-         return view('pedido.lista', compact('pedidos', 'statuses'));
-     }
+        return view('pedido.lista', compact('pedidos', 'statuses', 'statusSelecionado'));
+    }
 
      public function update(Request $request, $id)
      {

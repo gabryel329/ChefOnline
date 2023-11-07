@@ -35,14 +35,14 @@
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; height: 30%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
+            <h2><img style="width: 40%; height: 30%; margin-top: -10%;  margin-bottom: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
         <div class="row filters_menu">
             <div class="col-md-12">
                 <div class="btn-group filters_menu" role="group" aria-label="Filtrar por status">
                     @foreach ($statuses as $status)
                         <a href="{{ route('pedidos.lista', ['status' => $status->id]) }}"
-                           class="btn btn-secondary mr-2 @if ($status->id === 1) active @endif">{{ $status->nome }}</a>
+                           class="btn btn-secondary mr-2 @if ($status->id == $statusSelecionado) active @endif">{{ $status->nome }}</a>
                     @endforeach
                 </div>
             </div>
@@ -110,6 +110,19 @@
             });
         });
     });
+
+
+    $(document).ready(function() {
+        $('.filters_menu a').click(function() {
+            $('.filters_menu a').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $('.status-select').change(function() {
+            // Seu código de atualização de status aqui
+        });
+    });
+
 </script>
 
 @endsection
