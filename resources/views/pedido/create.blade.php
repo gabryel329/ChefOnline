@@ -1,23 +1,5 @@
 @extends('layouts.app')
 <style>
-    button{
-	width: 30px;
-	height: 30px;
-	font-size: 3em;
-	line-height: 30px;
-	border-radius: 10px;
-	outline: none;
-	border: none;
-	color: #fff;
-	cursor: pointer;
-	background: transparent;
-	box-shadow: inset -2px -2px 2px rgba(255,255,255,.2),
-				inset 2px 5px 15px rgba(0,0,0,.5);
-}
-button:active{
-	box-shadow: inset 2px 2px 2px rgba(255,255,255,.1),
-				inset -2px -5px 15px rgba(0,0,0,.5);
-}
 input{
 	border-radius: 10px;
 	outline: none;
@@ -26,12 +8,7 @@ input{
 	width: 50px;
 	text-align: center;
 	font-size: 1.5em;
-	color: #fff;
 	margin: 0 10px;
-	background: transparent;
-	box-shadow: inset -2px -2px 2px rgba(255,255,255,.2),
-				inset 2px 5px 15px rgba(0,0,0,.5);
-
 }
 </style>
 @section('content')
@@ -48,7 +25,7 @@ input{
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; height: 30%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
+            <h2><img style="width: 50%; height: 40%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
         <div class="col-mt-2">
             <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button">AVANÇAR</button>
@@ -71,9 +48,9 @@ input{
                                     </div>
                                     <div class="row">
                                         <div class="col-12" style="align-items: center">
-                                            <button type="button" class="sub">-</button>
+                                            <button type="button" class="sub btn btn-danger btn-lg"><strong>-</strong></button>
                                             <input type="text" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
-                                            <button type="button" class="add">+</button>
+                                            <button type="button" class="add btn btn-success btn-lg"><strong>+</strong></button>
                                             <input type="hidden" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                         </div>
                                     </div>

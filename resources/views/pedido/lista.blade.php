@@ -61,8 +61,9 @@
                                     <li>{{ $produto->nome }} - Quantidade: {{ $produto->pivot->quantidade }}</li>
                                 @endforeach
                                 <li>Forma Pagamento: {{ $pedido->formaPagamento->nome }}</li>
-                                <li><strong style="color: red">Total - R${{ $pedido->total }},00</strong></li>
+                                <li><strong style="color: red">Total: R${{ $pedido->total }},00</strong></li>
                             </ul>
+                            Observação:<p class="card-text"><small class="text-muted">{{ $pedido->obs }}</small></p>
                         </div>
                         <div class="card-footer">
                             <form action="{{ route('pedido.update', $pedido->id) }}" method="POST" class="update-status-form">
