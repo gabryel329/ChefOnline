@@ -48,9 +48,9 @@ input{
                                     </div>
                                     <div class="row">
                                         <div class="col-12" style="align-items: center">
-                                            <button type="button" class="sub btn btn-danger btn-lg"><strong>-</strong></button>
+                                            <button type="button" class="sub btn btn-danger"><strong>-</strong></button>
                                             <input type="text" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
-                                            <button type="button" class="add btn btn-success btn-lg"><strong>+</strong></button>
+                                            <button type="button" class="add btn btn-success"><strong>+</strong></button> - Porções
                                             <input type="hidden" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                         </div>
                                     </div>
@@ -66,7 +66,8 @@ input{
 </section>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
+
+    document.addEventListener('DOMContentLoaded', function() {
     let addBtns = document.querySelectorAll('.add');
     let subBtns = document.querySelectorAll('.sub');
     let qtyInputs = document.querySelectorAll('.qtyBox');

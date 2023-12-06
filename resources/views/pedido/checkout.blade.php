@@ -62,17 +62,21 @@
                     <form action="{{ route('pedido.processCheckout', ['pedido' => $pedido->id]) }}" method="POST">
                         @csrf
                         <div>
-                            <input type="text" name="nome" class="form-control" placeholder="Seu Nome" />
+                            <label>Nome</label>
+                            <input type="text" name="nome" class="form-control" />
                         </div>
                         <div>
-                            <input type="text" name="telefone" class="form-control" placeholder="Telefone" />
+                            <label>Telefone</label>
+                            <input type="text" name="telefone" class="form-control" placeholder="(XX)XXXXX-XXXX" />
                         </div>
                         <div>
-                            <input type="text" name="cpf" class="form-control" placeholder="CPF" />
+                            <label>CPF</label>
+                            <input type="text" name="cpf" class="form-control" placeholder="Opcional" />
                             <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
                             <input style="display: none" name="id" id="id" class="form-control" value="{{ $pedido->id }}" />
                         </div>
                         <div>
+                            <label>Forma Pagamento</label>
                             <select name="forma_pagamento_id" class="form-control nice-select wide">
                                 <option value="" disabled selected>Escolha</option>
                                 @foreach ($formasPagamento as $formaPagamento)
@@ -111,7 +115,7 @@
             var obs = $('textarea[name="obs"]').val();
             var formaPagamento = $('select[name="forma_pagamento_id"] option:selected').text();
 
-            if (nome && telefone && cpf) {
+            if (nome && telefone) {
                 var message = "*Camarão da Praça*\n\n";
                 message += "Olá, segue pedido *#" + $('#id').val() + "*\n\n";
 
