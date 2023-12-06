@@ -27,9 +27,6 @@ input{
         <div class="heading_container heading_center">
             <h2><img style="width: 50%; height: 40%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
-        <div class="col-mt-2">
-            <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button">AVANÇAR</button>
-        </div>
         <div class="filters-content">
             <form id="meuForm" action="{{ route('pedidos.store') }}" method="POST">
                 @csrf
@@ -61,6 +58,9 @@ input{
                     @endforeach
                 </div>
             </form>
+        </div>
+        <div class="col-mt-2">
+            <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button">AVANÇAR</button>
         </div>
     </div>
 </section>
