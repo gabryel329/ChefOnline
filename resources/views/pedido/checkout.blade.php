@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 
 <section class="book_section layout_padding">
@@ -8,41 +7,6 @@
             <h2><img style="width: 30%; height: 20%; margin-top: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="heading_container">
-                    <h2>Dados do Cliente</h2>
-                </div>
-                <div class="form_container rounded p-4" style="background-color: white;">
-                    <form action="{{ route('pedido.processCheckout', ['pedido' => $pedido->id]) }}" method="POST">
-                        @csrf
-                        <div>
-                            <input type="text" name="nome" class="form-control" placeholder="Seu Nome" />
-                        </div>
-                        <div>
-                            <input type="text" name="telefone" class="form-control" placeholder="Telefone" />
-                        </div>
-                        <div>
-                            <input type="text" name="cpf" class="form-control" placeholder="CPF" />
-                            <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
-                            <input style="display: none" name="id" id="id" class="form-control" value="{{ $pedido->id }}" />
-                        </div>
-                        <div>
-                            <select name="forma_pagamento_id" class="form-control nice-select wide">
-                                <option value="" disabled selected>Escolha</option>
-                                @foreach ($formasPagamento as $formaPagamento)
-                                    <option value="{{ $formaPagamento->id }}">{{ $formaPagamento->nome }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            <textarea name="obs" id="obs" class="form-control" placeholder="Informe onde você se encontra na praça"></textarea>
-                        </div>
-                        <div class="btn_box mt-4">
-                            <button id="finalizarButton" type="button" class="btn btn-danger">Finalizar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="heading_container">
                     <h2>Detalhes do Pedido</h2>
@@ -89,14 +53,52 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+            </div>
+            <div class="col-md-6">
+                <div class="heading_container">
+                    <h2>Dados do Cliente</h2>
+                </div>
+                <div class="form_container rounded p-4" style="background-color: white;">
+                    <form action="{{ route('pedido.processCheckout', ['pedido' => $pedido->id]) }}" method="POST">
+                        @csrf
+                        <div>
+                            <input type="text" name="nome" class="form-control" placeholder="Seu Nome" />
+                        </div>
+                        <div>
+                            <input type="text" name="telefone" class="form-control" placeholder="Telefone" />
+                        </div>
+                        <div>
+                            <input type="text" name="cpf" class="form-control" placeholder="CPF" />
+                            <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
+                            <input style="display: none" name="id" id="id" class="form-control" value="{{ $pedido->id }}" />
+                        </div>
+                        <div>
+                            <select name="forma_pagamento_id" class="form-control nice-select wide">
+                                <option value="" disabled selected>Escolha</option>
+                                @foreach ($formasPagamento as $formaPagamento)
+                                    <option value="{{ $formaPagamento->id }}">{{ $formaPagamento->nome }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <textarea style="height: 6em;" name="obs" id="obs" class="form-control" placeholder="Informe onde você se encontra na praça"></textarea>
+                        </div>
+                        <div class="btn_box mt-2">
+                            <button id="finalizarButton" type="button" class="btn btn-danger">Finalizar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="btn_box mt-2">
+                    <a href="javascript:history.back()" class="btn btn-danger">Cancelar</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -146,6 +148,14 @@
                 alert('Preencha todos os campos antes de finalizar o pedido.');
             }
         });
+    });
+
+    $(document).ready(function() {
+        // Máscara para CPF
+        $('input[name="cpf"]').inputmask("999.999.999-99", { showMaskOnHover: false });
+
+        // Máscara para telefone
+        $('input[name="telefone"]').inputmask("(99)99999-9999", { showMaskOnHover: false });
     });
 </script>
 

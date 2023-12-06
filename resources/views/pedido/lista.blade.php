@@ -60,6 +60,8 @@
                                 @foreach ($pedido->produtos as $produto)
                                     <li>{{ $produto->nome }} - Quantidade: {{ $produto->pivot->quantidade }}</li>
                                 @endforeach
+                                <li>Forma Pagamento: {{ $pedido->formaPagamento->nome }}</li>
+                                <li><strong style="color: red">Total - R${{ $pedido->total }},00</strong></li>
                             </ul>
                         </div>
                         <div class="card-footer">

@@ -58,7 +58,7 @@ input{
                 @csrf
                 <div class="row grid">
                     @foreach($produtos as $produto)
-                    <div class="col-sm-6 col-lg-3 all pasta">
+                    <div class="col-sm-3">
                         <div class="box">
                             <div>
                                 <div class="img-box">
