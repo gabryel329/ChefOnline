@@ -48,9 +48,9 @@ input{
                                     </div>
                                     <div class="row">
                                         <div class="col-12" style="align-items: center">
-                                            <button type="button" class="sub btn btn-danger"><strong>-</strong></button>
-                                            <input type="text" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
-                                            <button type="button" class="add btn btn-success"><strong>+</strong></button> - Porções
+                                            <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
+                                            <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
+                                            <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button> <span id="porcao-text{{ $produto->id }}"></span>
                                             <input type="hidden" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                         </div>
                                     </div>
@@ -66,6 +66,22 @@ input{
 </section>
 
 <script>
+    function qtdporcao(index, ref){
+        var qtd = document.getElementById("qtd"+index+"").value;
+
+        if (ref==0)
+        {
+            var qtd = qtd - 1;
+        }else{
+            var qtd = qtd + 1;
+        }
+
+        if (parseInt(qtd) > 1) {
+            document.getElementById("porcao-text"+index+"").innerHTML = "- Porções";
+        } else {
+            document.getElementById("porcao-text"+index+"").innerHTML = "- Porção";
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
     let addBtns = document.querySelectorAll('.add');

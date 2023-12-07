@@ -11,7 +11,7 @@
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <link rel="shortcut icon" href="images/favicon.png" type="">
+        <link rel="shortcut icon" href="images/logo1.png" type="">
 
         <title> ChefOnline </title>
 
@@ -35,7 +35,6 @@
 
 
         @stack('css')
-
     </head>
 
     <body class="elegant-background">

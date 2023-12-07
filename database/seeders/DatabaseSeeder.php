@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         //PRODUTOS
         DB::table('produto')->insert([
-            'nome' => 'Camarão 4 Queijo',
+            'nome' => 'Camarão c/ Queijo',
             'preco' => '16',
             'descricao' => '8 UND',
             'imagem' => 'CamaraoQueijo.jpg',
@@ -82,6 +82,13 @@ class DatabaseSeeder extends Seeder
             'preco' => '15',
             'descricao' => '8 UND',
             'imagem' => 'CamaraoEmpanado.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Coxinha',
+            'preco' => '15',
+            'descricao' => '12 UND',
+            'imagem' => 'Coxinha.jpg',
         ]);
     }
 }
