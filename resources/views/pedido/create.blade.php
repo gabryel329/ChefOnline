@@ -126,7 +126,7 @@ input{
         botaoAvancar.disabled = !habilitar;
     }
 
-    // Chame a função para habilitar/desabilitar o botão quando a página carregar
+    // Chame a função para habilitar/desabilitaasdr o botão quando a página carregar
     habilitarBotaoAvancar();
 });
 

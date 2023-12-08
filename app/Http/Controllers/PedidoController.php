@@ -75,7 +75,7 @@ class PedidoController extends Controller
             'total' => $request->total,
         ]);
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluÃ­do com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluí­do com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
@@ -120,7 +120,7 @@ class PedidoController extends Controller
              return response()->json(['message' => 'Status atualizado com sucesso']);
          }
 
-         return response()->json(['error' => 'Pedido nÃ£o encontrado'], 404);
+         return response()->json(['error' => 'Pedido não encontrado'], 404);
      }
 
 
