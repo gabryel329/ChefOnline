@@ -41,7 +41,7 @@ class PedidoController extends Controller
         foreach ($request->produtos as $produtoId => $produtoData) {
             $quantidade = $produtoData['quantidade'];
 
-            if ($quantidade > 0) { // Verifique se a quantidade é maior que 0 antes de adicionar ao pedido
+            if ($quantidade > 0) { // Verifique se a quantidade Ã© maior que 0 antes de adicionar ao pedido
                 $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
             }
         }
@@ -75,7 +75,7 @@ class PedidoController extends Controller
             'total' => $request->total,
         ]);
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluído com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluÃ­do com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
@@ -95,9 +95,9 @@ class PedidoController extends Controller
     public function lista($status = null)
     {
         $statuses = Status::all();
-        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today());
+        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('nome');
 
-        $statusSelecionado = $status ?? 1; // Defina o status selecionado, usando o valor padrão 1 se nenhum estiver definido.
+        $statusSelecionado = $status ?? 1; // Defina o status selecionado, usando o valor padrÃ£o 1 se nenhum estiver definido.
 
         if ($status !== null) {
             $pedidosQuery->where('status_id', $status);
@@ -116,11 +116,11 @@ class PedidoController extends Controller
              $pedido->status_id = $request->input('status_id');
              $pedido->save();
 
-             // Lide com a resposta AJAX, se necessário
+             // Lide com a resposta AJAX, se necessÃ¡rio
              return response()->json(['message' => 'Status atualizado com sucesso']);
          }
 
-         return response()->json(['error' => 'Pedido não encontrado'], 404);
+         return response()->json(['error' => 'Pedido nÃ£o encontrado'], 404);
      }
 
 
