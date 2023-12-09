@@ -27,6 +27,8 @@ Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
     Route::get('/pedidos', [PedidoController::class, 'lista']);
     Route::get('/pedidos/lista', [PedidoController::class, 'pedidos'])->name('pedidos.lista');
     Route::put('/pedidos/{id}/update', [PedidoController::class, 'update'])->name('pedidos.update');
+    Route::get('/filtro', [PedidoController::class, 'filtro']);
+    Route::post('/relatorio', [PedidoController::class, 'relatorio']);
 });
 Route::post('/pedido/store', [PedidoController::class, 'store'])->name('pedidos.store');
 Route::get('/pedido/checkout/{pedido}', [PedidoController::class, 'showCheckoutForm'])->name('pedido.checkout');

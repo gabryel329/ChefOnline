@@ -130,8 +130,33 @@ class PedidoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pedido $pedido)
+    public function filtro(Pedido $pedido)
     {
-        //
+        return view('pedido.filtro');
     }
+
+    public function relatorio(Request $request)
+    {
+        $dataInicial = $request->input('data_inicial');
+        $dataFinal = $request->input('data_final');
+        $status = $request->input('status');
+
+        $statusOptions = [
+            1 => 'Em Andamento',
+            2 => 'Feito',
+            3 => 'Deletado',
+        ];
+
+        $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal]);
+
+        // Adicione a condição para o filtro de status, se fornecido
+        if ($status) {
+            $query->where('status_id', $status);
+        }
+
+        $pedidos = $query->get();
+
+        return view('pedido.relatorio', compact('pedidos', 'dataInicial', 'dataFinal', 'status', 'statusOptions'));
+    }
+
 }
