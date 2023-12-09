@@ -27,32 +27,32 @@ class DatabaseSeeder extends Seeder
         //STATUS
 
         DB::table('status')->insert([
-            'nome' => 'EM ANDAMENTO',
+            'status' => 'EM ANDAMENTO',
         ]);
 
         DB::table('status')->insert([
-            'nome' => 'FEITO',
+            'status' => 'FEITO',
         ]);
 
         DB::table('status')->insert([
-            'nome' => 'DELETADO',
+            'status' => 'DELETADO',
         ]);
 
         //FORMA PAGAMENTO
         DB::table('forma_pagamento')->insert([
-            'nome' => 'PIX',
+            'forma' => 'PIX',
         ]);
 
         DB::table('forma_pagamento')->insert([
-            'nome' => 'DEBITO',
+            'forma' => 'DEBITO',
         ]);
 
         DB::table('forma_pagamento')->insert([
-            'nome' => 'CREDITO',
+            'forma' => 'CREDITO',
         ]);
 
         DB::table('forma_pagamento')->insert([
-            'nome' => 'DINHEIRO',
+            'forma' => 'DINHEIRO',
         ]);
 
         //PRODUTOS
@@ -89,6 +89,20 @@ class DatabaseSeeder extends Seeder
             'preco' => '15',
             'descricao' => '12 UND',
             'imagem' => 'Coxinha.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Guarana Antarctica',
+            'preco' => '2',
+            'descricao' => '200 ML',
+            'imagem' => 'Guarana.jpg',
+        ]);
+
+        DB::table('produto')->insert([
+            'nome' => 'Pepsi',
+            'preco' => '2',
+            'descricao' => '200 ML',
+            'imagem' => 'Pepsi.jpg',
         ]);
     }
 }

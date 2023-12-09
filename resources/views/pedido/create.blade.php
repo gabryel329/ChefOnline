@@ -51,7 +51,7 @@ input{
                                             <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
                                             <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
                                             <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button> <span id="porcao-text{{ $produto->id }}"></span>
-                                            <input type="hidden" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
+                                            <input type="hidden" id="prod{{ $produto->id }}" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                         </div>
                                     </div>
                                 </div>
@@ -66,20 +66,26 @@ input{
 </section>
 
 <script>
-    function qtdporcao(index, ref){
-        var qtd = document.getElementById("qtd"+index+"").value;
+    function qtdporcao(index, ref) {
+        var qtd = document.getElementById("qtd" + index).value;
+        var prod = document.getElementById("prod" + index).value;
 
-        if (ref==0)
-        {
-            var qtd = qtd - 1;
-        }else{
-            var qtd = qtd + 1;
+        console.log("prod:", prod);
+
+        if (ref == 0) {
+            qtd = parseInt(qtd) - 1;
+        } else {
+            qtd = parseInt(qtd) + 1;
         }
 
-        if (parseInt(qtd) > 1) {
-            document.getElementById("porcao-text"+index+"").innerHTML = "- Porções";
-        } else {
-            document.getElementById("porcao-text"+index+"").innerHTML = "- Porção";
+        if (qtd > 1 && (parseInt(prod) != 6 && parseInt(prod) != 7)) {
+            document.getElementById("porcao-text" + index).innerHTML = "- Porções";
+        } else if (qtd <= 1 && (parseInt(prod) != 6 && parseInt(prod) != 7)) {
+            document.getElementById("porcao-text" + index).innerHTML = "- Porção";
+        } else if (qtd > 1 && (parseInt(prod) == 6 || parseInt(prod) == 7)) {
+            document.getElementById("porcao-text" + index).innerHTML = "- Unds";
+        } else if (qtd <= 1 && (parseInt(prod) == 6 || parseInt(prod) == 7)) {
+            document.getElementById("porcao-text" + index).innerHTML = "- Und";
         }
     }
 

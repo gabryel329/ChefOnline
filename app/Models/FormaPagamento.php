@@ -11,7 +11,7 @@ class FormaPagamento extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'forma_pagamento';
-    protected $fillable = ['nome'];
+    protected $fillable = ['forma'];
     protected $dates = ['deleted_at'];
 
     public function pedidos()

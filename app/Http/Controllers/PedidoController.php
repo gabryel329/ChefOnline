@@ -91,38 +91,40 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-
-    public function lista($status = null)
+    public function lista()
     {
+        $pedidos = Pedido::with(['produtos', 'formaPagamento', 'status'])
+            ->orderBy('created_at', 'desc')
+            ->get();
         $statuses = Status::all();
-        $pedidosQuery = Pedido::with('produtos')->orderBy('id', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('nome');
 
-        $statusSelecionado = $status ?? 1; // Defina o status selecionado, usando o valor padrÃ£o 1 se nenhum estiver definido.
-
-        if ($status !== null) {
-            $pedidosQuery->where('status_id', $status);
-        }
-
-        $pedidos = $pedidosQuery->get();
-
-        return view('pedido.lista', compact('pedidos', 'statuses', 'statusSelecionado'));
+        return view('pedido.lista', compact('pedidos', 'statuses'));
     }
 
-     public function update(Request $request, $id)
-     {
-         $pedido = Pedido::find($id);
+    public function pedidos(Request $request)
+    {
+        $filtroStatus = $request->query('status_id');
 
-         if ($pedido) {
-             $pedido->status_id = $request->input('status_id');
-             $pedido->save();
+        $query = Pedido::with(['produtos', 'formaPagamento', 'status'])->orderBy('created_at', 'desc')->whereDate('created_at', Carbon::today());
 
-             // Lide com a resposta AJAX, se necessÃ¡rio
-             return response()->json(['message' => 'Status atualizado com sucesso']);
-         }
+        if ($filtroStatus !== null) {
+            $query->where('status_id', $filtroStatus);
+        }
 
-         return response()->json(['error' => 'Pedido não encontrado'], 404);
-     }
+        $pedidos = $query->get();
 
+        return response()->json(['pedidos' => $pedidos]);
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $pedido = Pedido::findOrFail($id);
+        $pedido->status_id = $request->input('status_id');
+        $pedido->save();
+
+        return redirect()->back()->with('success', 'Status atualiza com sucesso.');
+    }
 
 
     /**

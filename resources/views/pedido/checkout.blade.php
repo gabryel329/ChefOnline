@@ -63,7 +63,7 @@
                         @csrf
                         <div>
                             <label>Nome</label>
-                            <input type="text" name="nome" class="form-control" />
+                            <input type="text" name="nome" class="form-control" required />
                         </div>
                         <div>
                             <label>Telefone</label>
@@ -80,7 +80,7 @@
                             <select name="forma_pagamento_id" class="form-control nice-select wide">
                                 <option value="" disabled selected>Escolha</option>
                                 @foreach ($formasPagamento as $formaPagamento)
-                                    <option value="{{ $formaPagamento->id }}">{{ $formaPagamento->nome }}</option>
+                                    <option value="{{ $formaPagamento->id }}" required>{{ $formaPagamento->forma }}</option>
                                 @endforeach
                             </select>
                         </div>

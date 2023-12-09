@@ -11,7 +11,7 @@ class Status extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'status';
-    protected $fillable = ['nome'];
+    protected $fillable = ['status'];
     protected $dates = ['deleted_at'];
 
     public function pedidos()
