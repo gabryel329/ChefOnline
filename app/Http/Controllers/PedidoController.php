@@ -105,7 +105,7 @@ class PedidoController extends Controller
     {
         $filtroStatus = $request->query('status_id');
 
-        $query = Pedido::with(['produtos', 'formaPagamento', 'status'])->orderBy('created_at', 'desc')->whereDate('created_at', Carbon::today());
+        $query = Pedido::with(['produtos', 'formaPagamento', 'status'])->orderBy('created_at', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('nome');
 
         if ($filtroStatus !== null) {
             $query->where('status_id', $filtroStatus);
