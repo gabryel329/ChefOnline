@@ -205,6 +205,7 @@
                         <div class="card-header" style="text-align: center">
                             Pedido #${pedido.id}
                             ${pedido.nome ? `<p class="card-text"><small class="text-muted">${pedido.nome} - ${pedido.telefone}</small></p>` : ''}
+                            <p class="card-text"><small class="text-muted">${pedido.created_at}</small></p>
                         </div>
                         <div class="card-body">
                             <ul>
@@ -251,16 +252,6 @@
             carregarPedidos(status_idSelecionado);
         });
     });
-
-    // Função para atualizar a página a cada 30 segundos
-    function atualizarPagina() {
-        setTimeout(function() {
-            location.reload(); // Recarrega a página
-        }, 30000); // 30 segundos em milissegundos
-    }
-
-    // Chama a função na carga inicial da página
-    atualizarPagina();
 
 </script>
 
