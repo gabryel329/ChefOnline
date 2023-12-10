@@ -183,7 +183,6 @@
     };
 
     function exibirStatus_id(status_id, pedidos) {
-        console.log(pedido.created_at);
         var listaDePedidos = $('#lista-de-pedidos');
         if (statusNames.hasOwnProperty(status_id)) {
         listaDePedidos.append('<div class="status_id-separator"><br><h2>' + statusNames[status_id] + '</h2></div>');
