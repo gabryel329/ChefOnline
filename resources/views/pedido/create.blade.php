@@ -82,9 +82,9 @@ input{
             document.getElementById("porcao-text" + index).innerHTML = "- Porções";
         } else if (qtd <= 1 && (parseInt(prod) != 6 && parseInt(prod) != 7 && parseInt(prod) != 8)) {
             document.getElementById("porcao-text" + index).innerHTML = "- Porção";
-        } else if (qtd > 1 && (parseInt(prod) == 6 || parseInt(prod) == 7 && parseInt(prod) == 8)) {
+        } else if (qtd > 1 && (parseInt(prod) == 6 || parseInt(prod) == 7 || parseInt(prod) == 8)) {
             document.getElementById("porcao-text" + index).innerHTML = "- Unds";
-        } else if (qtd <= 1 && (parseInt(prod) == 6 || parseInt(prod) == 7 && parseInt(prod) == 8)) {
+        } else if (qtd <= 1 && (parseInt(prod) == 6 || parseInt(prod) == 7 || parseInt(prod) == 8)) {
             document.getElementById("porcao-text" + index).innerHTML = "- Und";
         }
     }
