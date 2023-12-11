@@ -149,7 +149,7 @@ class PedidoController extends Controller
             3 => 'Deletado',
         ];
 
-        $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal]);
+        $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal])->whereNotNull('nome');
 
         // Adicione a condição para o filtro de status, se fornecido
         if ($status) {

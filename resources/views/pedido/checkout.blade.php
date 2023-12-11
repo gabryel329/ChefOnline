@@ -70,8 +70,8 @@
                             <input type="text" name="telefone" class="form-control" placeholder="(XX)XXXXX-XXXX" />
                         </div>
                         <div>
-                            <label>CPF</label>
-                            <input type="text" name="cpf" class="form-control" placeholder="Opcional" />
+                            {{-- <label>CPF</label>
+                            <input type="text" name="cpf" class="form-control" placeholder="Opcional" /> --}}
                             <input style="display: none" name="total" class="form-control" value="{{ $pedido->total }}" />
                             <input style="display: none" name="id" id="id" class="form-control" value="{{ $pedido->id }}" />
                         </div>
@@ -111,7 +111,7 @@
         $('#finalizarButton').on('click', function() {
             var nome = $('input[name="nome"]').val();
             var telefone = $('input[name="telefone"]').val();
-            var cpf = $('input[name="cpf"]').val();
+            // var cpf = $('input[name="cpf"]').val();
             var obs = $('textarea[name="obs"]').val();
             var formaPagamento = $('select[name="forma_pagamento_id"] option:selected').text();
 

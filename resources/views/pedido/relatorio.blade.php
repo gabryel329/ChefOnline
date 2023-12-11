@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Camarão da Praça</title>
+@extends('layouts.app')
     <style>
-        body {
+        h1 {
             text-align: center;
+            margin-top: 20px;
         }
 
-        h1 {
-            margin-top: 20px;
+        p {
+            text-align: center;
         }
 
         table {
@@ -23,8 +21,7 @@
             text-align: center;
         }
     </style>
-</head>
-<body>
+@section('content')
     <h1>Relatório de Vendas</h1>
     <p>Período: {{ $dataInicial }} a {{ $dataFinal }}</p>
     <p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }}</p>
@@ -56,5 +53,6 @@
             </tr>
         </tbody>
     </table>
-</body>
-</html>
+
+
+@endsection
