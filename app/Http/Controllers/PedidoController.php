@@ -45,6 +45,7 @@ class PedidoController extends Controller
                 $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
             }
         }
+        $pedido->created_at = Carbon::parse($pedido->created_at)->subHours(3);
 
 
         return redirect()->route('pedido.checkout', ['pedido' => $pedido->id]);
@@ -75,7 +76,7 @@ class PedidoController extends Controller
             'total' => $request->total,
         ]);
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluí­do com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluido com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)

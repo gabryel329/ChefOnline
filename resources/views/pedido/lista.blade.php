@@ -205,6 +205,7 @@
                         <div class="card-header" style="text-align: center">
                             Pedido #${pedido.id}
                             ${pedido.nome ? `<p class="card-text"><small class="text-muted">${pedido.nome} - ${pedido.telefone}</small></p>` : ''}
+                            <p class="card-text"><small class="text-muted">${pedido.created_at}</small></p>
                         </div>
                         <div class="card-body">
                             <ul>
