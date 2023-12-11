@@ -121,6 +121,11 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input class="form-control type="text" id="filterInput" placeholder="Filtrar pelo nome" oninput="filterCards()">
+            </div>
+        </div>
         <div class="filters-content" id="lista-de-pedidos">
             <!-- Aqui serão exibidos os produtos via AJAX -->
         </div>
@@ -130,6 +135,27 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    function filterCards() {
+        // Get the input value
+        var filterValue = document.getElementById("filterInput").value.toUpperCase();
+
+        // Get all card elements
+        var cards = document.querySelectorAll('.card');
+
+        // Loop through each card
+        cards.forEach(function(card) {
+            // Get the text content from the card
+            var cardText = card.innerText.toUpperCase();
+
+            // Check if the card text contains the filter value
+            if (cardText.includes(filterValue)) {
+                card.style.display = ""; // Show the card
+            } else {
+                card.style.display = "none"; // Hide the card
+            }
+        });
+    }
+
     function carregarPedidos(filtroStatus) {
         var url = '/pedidos/lista';
         if (filtroStatus !== undefined && filtroStatus !== '') {
@@ -265,15 +291,15 @@
         });
     });
 
-    // Função para atualizar a página a cada 30 segundos
-    function atualizarPagina() {
-        setTimeout(function() {
-            location.reload(); // Recarrega a página
-        }, 30000); // 30 segundos em milissegundos
-    }
+    // // Função para atualizar a página a cada 30 segundos
+    // function atualizarPagina() {
+    //     setTimeout(function() {
+    //         location.reload(); // Recarrega a página
+    //     }, 30000); // 30 segundos em milissegundos
+    // }
 
-    // Chama a função na carga inicial da página
-    atualizarPagina();
+    // // Chama a função na carga inicial da página
+    // atualizarPagina();
 
 </script>
 
