@@ -1,30 +1,60 @@
-<!-- Resultado do relatório -->
-<h2>Relatório de Pedidos</h2>
-<p>Período: {{ $dataInicial }} a {{ $dataFinal }}</p>
-<p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camarão da Praça</title>
+    <style>
+        body {
+            text-align: center;
+        }
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Total</th>
-            <th>Nome</th>
-            <!-- Adicione mais colunas conforme necessário -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($pedidos as $pedido)
+        h1 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório de Vendas</h1>
+    <p>Período: {{ $dataInicial }} a {{ $dataFinal }}</p>
+    <p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }}</p>
+    <table>
+        <thead>
             <tr>
-                <td>{{ $pedido->id }}</td>
-                <td>{{ $pedido->total }}</td>
-                <td>{{ $pedido->nome }}</td>
+                <th>Pedido</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data/Hora</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($pedidos as $pedido)
+                <tr>
+                    <td>{{ $pedido->id }}</td>
+                    <td>{{ $pedido->nome }}</td>
+                    <td>{{ $pedido->telefone }}</td>
+                    <td>{{ $pedido->created_at }}</td>
+                    <td>R${{ $pedido->total }},00</td>
+                </tr>
+            @endforeach
+            <tr>
+                <td><strong>Total de Pedidos: {{ $pedidos->count('id') }}</strong></td>
+                <td colspan="3"></td>
+                <td><strong>Total Geral: R${{ $pedidos->sum('total') }},00</strong></td>
                 <!-- Adicione mais colunas conforme necessário -->
             </tr>
-        @endforeach
-        <tr>
-            <td colspan="2"><strong>Total Geral:</strong></td>
-            <td>{{ $pedidos->sum('total') }}</td>
-            <!-- Adicione mais colunas conforme necessário -->
-        </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</body>
+</html>

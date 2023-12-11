@@ -205,7 +205,7 @@
                         <div class="card-header" style="text-align: center">
                             Pedido #${pedido.id}
                             ${pedido.nome ? `<p class="card-text"><small class="text-muted">${pedido.nome} - ${pedido.telefone}</small></p>` : ''}
-                            <p class="card-text"><small class="text-muted">${pedido.created_at}</small></p>
+                            <p class="card-text"><small class="text-muted">${formatarData(pedido.created_at)}</small></p>
                         </div>
                         <div class="card-body">
                             <ul>
@@ -238,6 +238,18 @@
         });
 
         htmlString += '</div>';
+
+        function formatarData(data) {
+            const dataFormatada = new Date(data);
+            const dia = String(dataFormatada.getDate()).padStart(2, '0');
+            const mes = String(dataFormatada.getMonth() + 1).padStart(2, '0');
+            const ano = dataFormatada.getFullYear();
+            const horas = String(dataFormatada.getHours()).padStart(2, '0');
+            const minutos = String(dataFormatada.getMinutes()).padStart(2, '0');
+            const segundos = String(dataFormatada.getSeconds()).padStart(2, '0');
+
+            return `${dia}-${mes}-${ano} ${horas}:${minutos}:${segundos}`;
+        }
 
         listaDePedidos.append(htmlString);
     }

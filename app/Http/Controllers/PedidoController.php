@@ -45,7 +45,6 @@ class PedidoController extends Controller
                 $pedido->produtos()->attach($produtoId, ['quantidade' => $quantidade]);
             }
         }
-        $pedido->created_at = Carbon::parse($pedido->created_at)->subHours(3);
 
 
         return redirect()->route('pedido.checkout', ['pedido' => $pedido->id]);
@@ -65,7 +64,7 @@ class PedidoController extends Controller
     public function processCheckout(Request $request, $pedido)
     {
         $pedido = Pedido::findOrFail($pedido);
-
+        $novaDataHora = Carbon::now()->subHours(3);
         $pedido->update([
             'nome' => $request->nome,
             'cpf' => $request->cpf,
@@ -74,9 +73,10 @@ class PedidoController extends Controller
             'status_id' => '1',
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'total' => $request->total,
+            'created_at' => $novaDataHora,
         ]);
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluido com sucesso!');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluí­do com sucesso!');
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
@@ -106,7 +106,7 @@ class PedidoController extends Controller
     {
         $filtroStatus = $request->query('status_id');
 
-        $query = Pedido::with(['produtos', 'formaPagamento', 'status'])->orderBy('created_at', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('nome');
+        $query = Pedido::with(['produtos', 'formaPagamento', 'status'])->orderBy('id', 'desc')->whereDate('created_at', Carbon::today())->whereNotNull('nome');
 
         if ($filtroStatus !== null) {
             $query->where('status_id', $filtroStatus);
@@ -138,8 +138,9 @@ class PedidoController extends Controller
 
     public function relatorio(Request $request)
     {
-        $dataInicial = $request->input('data_inicial');
-        $dataFinal = $request->input('data_final');
+        $dataInicial = date('Y-m-d', strtotime($request->input('data_inicial')));
+        $dataFinal = date('Y-m-d', strtotime($request->input('data_final')));
+
         $status = $request->input('status');
 
         $statusOptions = [
