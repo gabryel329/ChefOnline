@@ -97,6 +97,7 @@
     <ul class="menu__box">
       <li><a class="menu__item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a></li>
       <li><a class="menu__item" href="/filtro">Relatorio</a></li>
+      <li><a class="menu__item" href="/produtos">Produtos</a></li>
     </ul>
 </div>
 
