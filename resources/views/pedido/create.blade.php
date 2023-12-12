@@ -23,9 +23,8 @@ input{
 </div>
 @endif
 <section class="food_section layout_padding">
-    <div class="container">
         <div class="heading_container heading_center">
-            <h2><img style="width: 50%; height: 40%; margin-top: -10%" src="{{ asset('images/logo2.png') }}"></h2>
+            <h2><img style="width: 30%; aspect-ratio:3/2; object-fit: contain;" src="{{ asset('images/logo2.png') }}"></h2>
         </div>
         <div class="col-mt-2">
             <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button">AVANÇAR</button>
@@ -67,7 +66,6 @@ input{
                 </div>
             </form>
         </div>
-    </div>
 </section>
 
 <script>

@@ -38,7 +38,7 @@
     </head>
 
     <body class="elegant-background">
-
+        <div class="container">
         @php
             @session_start();
         @endphp
@@ -71,7 +71,7 @@
         <!-- End Google Map -->
 
         @stack('scripts')
-
+        </div>
     </body>
 
 </html>
