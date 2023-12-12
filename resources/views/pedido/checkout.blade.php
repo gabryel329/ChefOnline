@@ -26,11 +26,11 @@
                                             <div>
                                                 <span class="thin"><strong>{{ $produto->nome }}</strong></span>
                                                 <br>
-                                                <span class="small">Preço: R${{ $produto->preco }},00</span>
+                                                <span class="small">Preço: R${{ $produto->preco }}</span>
                                                 <br>
                                                 <span id="qtd">Porções: {{ $produto->pivot->quantidade }}</span>
                                                 <br>
-                                                <span class="thin small">Subtotal: R${{ $produto->preco * $produto->pivot->quantidade }},00</span>
+                                                <span class="thin small">Subtotal: R${{ number_format($produto->preco * $produto->pivot->quantidade, 2) }}</span>
                                             </div>
                                         </td>
                                         {{-- <td>
@@ -49,7 +49,7 @@
                     <div class="total">
                         <div class="text-center">
                             <div class="thin dense" style="color: red"><strong>TOTAL</strong></div>
-                            <div id="total" name="total" class="thin dense">R${{ $total }},00</div>
+                            <div id="total" name="total" class="thin dense">R${{ number_format($total, 2) }}</div>
                         </div>
                     </div>
                 </div>

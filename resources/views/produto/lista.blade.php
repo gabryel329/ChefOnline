@@ -66,7 +66,12 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="inputText">Preço</label>
-                                                                <input type="text" class="form-control" id="inputText" name="preco">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text">R$</span>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" id="preco" name="preco" onblur="formatarPreco()">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -113,7 +118,7 @@
                                     <tr>
                                         <td scope="row">{{ $produto->id }}</td>
                                         <td>{{ $produto->nome }}</td>
-                                        <td>R${{ $produto->preco }},00</td>
+                                        <td>R${{ $produto->preco }}</td>
                                         <td>{{ $produto->descricao }}</td>
                                         <td>
                                             <form action="{{ route('produtos.destroy', $produto->id) }}" method="post"
@@ -159,7 +164,12 @@
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Preço</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="preco" value="{{ $produto->preco }}">
+                                                                                <div class="input-group mb-3">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <span class="input-group-text">R$</span>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control" id="preco2" name="preco" onblur="formatarPreco2()" value="{{ $produto->preco }}">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -204,4 +214,33 @@
     </section>
 
 </main>
+<script>
+    function formatarPreco() {
+      var precoInput = document.getElementById('preco');
+      var precoValue = precoInput.value;
+
+      // Remover espaços em branco e substituir vírgulas por pontos
+      precoValue = precoValue.replace(/\s/g, '').replace('.', ',');
+
+      // Converter para número com duas casas decimais
+      precoValue = parseFloat(precoValue).toFixed(2);
+
+      // Atualizar o valor no input
+      precoInput.value = precoValue;
+    }
+
+    function formatarPreco2() {
+      var precoInput = document.getElementById('preco2');
+      var precoValue = precoInput.value;
+
+      // Remover espaços em branco e substituir vírgulas por pontos
+      precoValue = precoValue.replace(/\s/g, '').replace('.', ',');
+
+      // Converter para número com duas casas decimais
+      precoValue = parseFloat(precoValue).toFixed(2);
+
+      // Atualizar o valor no input
+      precoInput.value = precoValue;
+    }
+</script>
 @endsection

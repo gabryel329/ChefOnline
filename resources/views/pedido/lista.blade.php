@@ -108,7 +108,7 @@
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; height: 30%; margin-top: -10%; margin-bottom: -10%" src="{{ asset('images/logo1.png') }}"></h2>
+            <h2><img style="width: 40%; height: 30%; margin-bottom: -10%" src="{{ asset('images/logo1.png') }}"></h2>
         </div>
         <div class="row filters_menu">
             <div class="col-md-12">

@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         //PRODUTOS
         DB::table('produto')->insert([
             'nome' => 'Camarão c/ Queijo',
-            'preco' => '16',
+            'preco' => '16.00',
             'descricao' => '8 UND',
             'imagem' => 'CamaraoQueijo.jpg',
             'tipo' => 1,
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Kibe',
-            'preco' => '15',
+            'preco' => '15.00',
             'descricao' => '12 UND',
             'imagem' => 'Kibe.jpg',
             'tipo' => 1,
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Camarão na Tapioca',
-            'preco' => '18',
+            'preco' => '18.00',
             'descricao' => '8 UND',
             'imagem' => 'CamaraoTapioca.jpg',
             'tipo' => 1,
@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Camarão Empanado',
-            'preco' => '15',
+            'preco' => '15.00',
             'descricao' => '8 UND',
             'imagem' => 'CamaraoEmpanado.jpg',
             'tipo' => 1,
@@ -90,7 +90,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Coxinha',
-            'preco' => '15',
+            'preco' => '15.00',
             'descricao' => '12 UND',
             'imagem' => 'Coxinha.jpg',
             'tipo' => 1,
@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Sortidos',
-            'preco' => '20',
+            'preco' => '20.00',
             'descricao' => '4 Kibes, 4 Coxinhas, 2 Encapotado, 2 na Tapioca',
             'imagem' => 'Sortidos.png',
             'tipo' => 1,
@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Guarana Antarctica',
-            'preco' => '2',
+            'preco' => '2.00',
             'descricao' => '200 ML',
             'imagem' => 'Guarana.jpg',
             'tipo' => 2,
@@ -114,7 +114,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Pepsi',
-            'preco' => '2',
+            'preco' => '2.00',
             'descricao' => '200 ML',
             'imagem' => 'Pepsi.jpg',
             'tipo' => 2,
@@ -122,7 +122,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('produto')->insert([
             'nome' => 'Coca-Cola',
-            'preco' => '6',
+            'preco' => '6.00',
             'descricao' => '1 Litro',
             'imagem' => 'Cocacola.jpg',
             'tipo' => 2,

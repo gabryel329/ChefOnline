@@ -48,7 +48,7 @@ input{
                                 <div class="detail-box">
                                     <h5>{{ $produto->nome }}</h5>
                                     <div class="options">
-                                        <h6>R${{ number_format($produto->preco, 2) }} - <small>{{$produto->descricao }}</small></h6>
+                                        <h6>R${{ $produto->preco }} - <small>{{$produto->descricao }}</small></h6>
                                     </div>
                                     <div class="row">
                                         <div class="col-12" style="align-items: center">

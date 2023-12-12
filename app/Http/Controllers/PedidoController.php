@@ -138,8 +138,8 @@ class PedidoController extends Controller
 
     public function relatorio(Request $request)
     {
-        $dataInicial = date('Y-m-d', strtotime($request->input('data_inicial')));
-        $dataFinal = date('Y-m-d', strtotime($request->input('data_final')));
+        $dataInicial = date('Y-m-d', strtotime($request->input('data_inicial') . ' 00:00:00'));
+        $dataFinal = date('Y-m-d', strtotime($request->input('data_final') . ' 23:59:59'));
 
         $status = $request->input('status');
 
@@ -157,6 +157,8 @@ class PedidoController extends Controller
         }
 
         $pedidos = $query->get();
+        // dd($query->toSql(), $query->getBindings());
+        // dd($dataInicial, $dataFinal, $status, $pedidos);
 
         return view('pedido.relatorio', compact('pedidos', 'dataInicial', 'dataFinal', 'status', 'statusOptions'));
     }

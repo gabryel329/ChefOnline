@@ -42,13 +42,13 @@
                     <td>{{ $pedido->nome }}</td>
                     <td>{{ $pedido->telefone }}</td>
                     <td>{{ $pedido->created_at }}</td>
-                    <td>R${{ $pedido->total }},00</td>
+                    <td>R${{ number_format($pedido->total, 2) }}</td>
                 </tr>
             @endforeach
             <tr>
                 <td><strong>Total de Pedidos: {{ $pedidos->count('id') }}</strong></td>
                 <td colspan="3"></td>
-                <td><strong>Total Geral: R${{ $pedidos->sum('total') }},00</strong></td>
+                <td><strong>Total Geral: R${{ number_format($pedidos->sum('total'),2) }}</strong></td>
                 <!-- Adicione mais colunas conforme necessário -->
             </tr>
         </tbody>
