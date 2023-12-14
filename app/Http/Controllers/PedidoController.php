@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Status;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -138,8 +139,11 @@ class PedidoController extends Controller
 
     public function relatorio(Request $request)
     {
-        $dataInicial = date('Y-m-d', strtotime($request->input('data_inicial') . ' 00:00:00'));
-        $dataFinal = date('Y-m-d', strtotime($request->input('data_final') . ' 23:59:59'));
+        $dataInicialInput = $request->input('data_inicial');
+        $dataFinalInput = $request->input('data_final');
+
+        $dataInicial = (new DateTime($dataInicialInput))->setTime(0, 0, 0)->format('Y-m-d H:i:s');
+        $dataFinal = (new DateTime($dataFinalInput))->setTime(23, 59, 59)->format('Y-m-d H:i:s');
 
         $status = $request->input('status');
 
