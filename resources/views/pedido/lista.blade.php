@@ -1,4 +1,6 @@
 @extends('layouts.app')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <style>
     #menu__toggle {
@@ -226,6 +228,11 @@
                 4: 'DINHEIRO'
             };
 
+            const pago = {
+                'S': 'Sim',
+                'N': 'Não'
+            };
+
             htmlString += `
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
@@ -245,20 +252,45 @@
                             ${pedido.obs ? `Observação:<p class="card-text"><small class="text-muted">${pedido.obs}</small></p>` : ''}
                         </div>
                         <div class="card-footer">
-                            <form action="/pedidos/${pedido.id}/update" method="POST" class="update-status-form">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="pedido_id" value="${pedido.id}">
-                            <div class="form-group">
-                                <label for="status_id">Status do Pedido:</label>
-                                <select name="status_id" class="form-control">
-                                    <option value="1" ${pedido.status_id == 1 ? 'selected' : ''}>Em Andamento</option>
-                                    <option value="2" ${pedido.status_id == 2 ? 'selected' : ''}>Feito</option>
-                                    <option value="3" ${pedido.status_id == 3 ? 'selected' : ''}>Deletado</option>
-                                </select>
+                            <div class="col-md-12">
+                                <form action="/pedidos/${pedido.id}/update" method="POST" class="update-status-form">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="exampleRadios1">Pago:</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pago" value="S" id="pago1" ${pedido.pago === 'S' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="pago1">
+                                                    Sim
+                                                </label>
+                                                </div>
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="pago" value="N" id="pago2" ${pedido.pago === 'N' ? 'checked' : ''}>
+                                                <label class="form-check-label" for="pago2">
+                                                    Não
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="hidden" name="pedido_id" value="${pedido.id}">
+                                            <div class="form-group">
+                                                <label for="status_id">Status do Pedido:</label>
+                                                <select name="status_id" class="form-control">
+                                                    <option value="1" ${pedido.status_id == 1 ? 'selected' : ''}>Em Andamento</option>
+                                                    <option value="2" ${pedido.status_id == 2 ? 'selected' : ''}>Feito</option>
+                                                    <option value="3" ${pedido.status_id == 3 ? 'selected' : ''}>Deletado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="form-control btn btn-danger" type="submit">Atualizar</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <button type="submit" class="btn btn-danger">Atualizar Status</button>
-                        </form>
                         </div>
                     </div>
                 </div>`;

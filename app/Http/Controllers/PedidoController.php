@@ -72,6 +72,7 @@ class PedidoController extends Controller
             'telefone' => $request->telefone,
             'obs' => $request->obs,
             'status_id' => '1',
+            'pago' => 'N',
             'forma_pagamento_id' => $request->forma_pagamento_id,
             'total' => $request->total,
             'created_at' => $novaDataHora,
@@ -120,12 +121,12 @@ class PedidoController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $pedido = Pedido::findOrFail($id);
         $pedido->status_id = $request->input('status_id');
+        $pedido->pago = $request->input('pago');
         $pedido->save();
 
-        return redirect()->back()->with('success', 'Status atualiza com sucesso.');
+        return redirect()->back()->with('success', 'Status atualizado com sucesso.');
     }
 
 

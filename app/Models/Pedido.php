@@ -11,7 +11,7 @@ class Pedido extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'pedido';
-    protected $fillable = ['total', 'nome', 'cpf', 'telefone', 'obs', 'forma_pagamento_id', 'status_id'];
+    protected $fillable = ['total', 'nome', 'cpf', 'telefone', 'obs', 'forma_pagamento_id', 'status_id', 'pago'];
     protected $dates = ['deleted_at'];
 
     public function produtos()
