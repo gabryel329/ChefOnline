@@ -20,8 +20,20 @@
             padding: 10px;
             text-align: center;
         }
+        #botao-canto-superior-direito {
+            position: fixed;
+            top: 10px; /* Distância do topo */
+            right: 10px; /* Distância da direita */
+            padding: 10px;
+            background-color: #e25a5a; /* Cor de fundo */
+            color: #fff; /* Cor do texto */
+            border: none;
+            cursor: pointer;
+            border-radius: 10%;
+        }
     </style>
 @section('content')
+<a href="/filtro" id="botao-canto-superior-direito" class="btn btn-secondary">Voltar</a>
     <h1>Relatório de Vendas</h1>
     <p>Período: {{ $dataInicial }} a {{ $dataFinal }}</p>
     <p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }} - Pago: {{ $pago ? $pagoOptions[$pago] : 'Todos' }}</p>

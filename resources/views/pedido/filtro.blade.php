@@ -6,8 +6,22 @@
     align-items: center;
     height: 100vh; /* Optional: Set a specific height to center vertically */
 }
+/* Estilo para o botão no canto superior direito */
+#botao-canto-superior-direito {
+    position: fixed;
+    top: 10px; /* Distância do topo */
+    right: 10px; /* Distância da direita */
+    padding: 10px;
+    background-color: #e25a5a; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    border: none;
+    cursor: pointer;
+    border-radius: 10%;
+}
 </style>
 @section('content')
+<a href="/pedidos" id="botao-canto-superior-direito" class="btn btn-secondary">Voltar</a>
+
     <div class="form-container">
 
             <form action="/relatorio" method="post">
