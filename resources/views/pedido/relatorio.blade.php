@@ -24,7 +24,7 @@
 @section('content')
     <h1>Relatório de Vendas</h1>
     <p>Período: {{ $dataInicial }} a {{ $dataFinal }}</p>
-    <p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }}</p>
+    <p>Status: {{ $status ? $statusOptions[$status] : 'Todos' }} - Pago: {{ $pago ? $pagoOptions[$pago] : 'Todos' }}</p>
     <table>
         <thead>
             <tr>

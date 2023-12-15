@@ -147,11 +147,17 @@ class PedidoController extends Controller
         $dataFinal = (new DateTime($dataFinalInput))->setTime(23, 59, 59)->format('Y-m-d H:i:s');
 
         $status = $request->input('status');
+        $pago = $request->input('pago');
 
         $statusOptions = [
             1 => 'Em Andamento',
             2 => 'Feito',
             3 => 'Deletado',
+        ];
+
+        $pagoOptions = [
+            'S' => 'Sim',
+            'N' => 'Não',
         ];
 
         $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal])->whereNotNull('nome');
@@ -161,11 +167,12 @@ class PedidoController extends Controller
             $query->where('status_id', $status);
         }
 
-        $pedidos = $query->get();
-        // dd($query->toSql(), $query->getBindings());
-        // dd($dataInicial, $dataFinal, $status, $pedidos);
+        if($pago) {
+            $query->where('pago', $pago);
+        }
 
-        return view('pedido.relatorio', compact('pedidos', 'dataInicial', 'dataFinal', 'status', 'statusOptions'));
+        $pedidos = $query->get();
+        return view('pedido.relatorio', compact('pedidos', 'dataInicial', 'dataFinal', 'status', 'statusOptions', 'pago', 'pagoOptions'));
     }
 
 }

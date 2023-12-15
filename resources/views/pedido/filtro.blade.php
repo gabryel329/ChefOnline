@@ -26,6 +26,13 @@
                     <option value="3">Deletado</option>
                     <!-- Adicione mais opções conforme necessário -->
                 </select>
+                <label for="pago">Pago:</label>
+                <select class="form-control" name="pago">
+                    <option value="">Todos</option>
+                    <option value="S">Sim</option>
+                    <option value="N">Não</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
                 <br>
                 <button class="btn btn-danger" type="submit">Gerar Relatório</button>
             </form>
