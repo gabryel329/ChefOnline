@@ -48,7 +48,7 @@
             </ul>
         </div>
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; height: 30%; margin-bottom: -10%" src="{{ optional($empresa)->imagem }}"></h2>
+            <h2><img style="width: 40%; aspect-ratio:3/2; object-fit: contain;" src="{{ optional($empresa)->imagem }}"></h2>
         </div>
         <div class="row filters_menu">
             <div class="col-md-12">
