@@ -140,7 +140,7 @@ class DatabaseSeeder extends Seeder
         //Empresa
         DB::table('empresas')->insert([
             'nome' => 'Camarão da Praça',
-            'logo' => 'images/logo2.png',
+            'imagem' => 'images/logo2.png',
         ]);
 
     }
