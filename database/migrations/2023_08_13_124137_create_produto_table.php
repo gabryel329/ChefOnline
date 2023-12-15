@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('nome', 150);
             $table->string('preco', 100);
             $table->string('descricao', 250)->nullable();
+            $table->string('imagem', 150)->nullable();
+            $table->integer('tipo')->nullable();
+            $table->foreign('tipo')->references('id')->on('tipo_prod')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

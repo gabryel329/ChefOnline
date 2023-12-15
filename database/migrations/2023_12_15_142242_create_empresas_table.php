@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pedido', function (Blueprint $table) {
-            $table->string('obs', 1000)->nullable();
+        Schema::create('empresas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome', 250)->nullable();
+            $table->string('imagem', 150)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -21,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pedido', function (Blueprint $table) {
-        });
+        Schema::dropIfExists('empresas');
     }
 };

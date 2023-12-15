@@ -6,6 +6,7 @@ use App\Models\FormaPagamento;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Status;
+use App\Models\tipoProd;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -20,8 +21,10 @@ class PedidoController extends Controller
 
     public function index()
     {
+        $empresa = \App\Models\empresa::first();
         $produtos = Produto::all();
-        return view('pedido.create', compact('produtos'));
+        $tipos = tipoProd::all();
+        return view('pedido.create', compact(['produtos', 'tipos', 'empresa']));
     }
 
     public function store(Request $request)
@@ -54,12 +57,13 @@ class PedidoController extends Controller
 
     public function showCheckoutForm($pedido)
     {
+        $empresa = \App\Models\empresa::first();
         $pedido = Pedido::findOrFail($pedido);
         $formasPagamento = FormaPagamento::all();
         $produtos = $pedido->produtos;
         $total = $pedido->total;
 
-        return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total'));
+        return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total', 'empresa'));
     }
 
     public function processCheckout(Request $request, $pedido)
@@ -96,12 +100,13 @@ class PedidoController extends Controller
      */
     public function lista()
     {
+        $empresa = \App\Models\empresa::first();
         $pedidos = Pedido::with(['produtos', 'formaPagamento', 'status'])
             ->orderBy('created_at', 'desc')
             ->get();
         $statuses = Status::all();
 
-        return view('pedido.lista', compact('pedidos', 'statuses'));
+        return view('pedido.lista', compact('pedidos', 'statuses', 'empresa'));
     }
 
     public function pedidos(Request $request)

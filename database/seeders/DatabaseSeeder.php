@@ -55,6 +55,15 @@ class DatabaseSeeder extends Seeder
             'forma' => 'DINHEIRO',
         ]);
 
+        //Tipo
+        DB::table('tipo_prod')->insert([
+            'tipo' => 'Salgados',
+        ]);
+
+        DB::table('tipo_prod')->insert([
+            'tipo' => 'Bebidas',
+        ]);
+
         //PRODUTOS
         DB::table('produto')->insert([
             'nome' => 'Camarão c/ Queijo',
@@ -126,6 +135,12 @@ class DatabaseSeeder extends Seeder
             'descricao' => '1 Litro',
             'imagem' => 'Cocacola.jpg',
             'tipo' => 2,
+        ]);
+
+        //Empresa
+        DB::table('empresas')->insert([
+            'nome' => 'Camarão da Praça',
+            'logo' => 'images/logo2.png',
         ]);
 
     }

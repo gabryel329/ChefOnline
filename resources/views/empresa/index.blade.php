@@ -2,6 +2,7 @@
 @extends('layouts.app')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+@section('content')
 <style>
     #botao-canto-superior-direito {
     position: fixed;
@@ -15,12 +16,10 @@
     border-radius: 10%;
 }
 </style>
-@section('content')
-
 <main id="main" class="main">
     <a href="/pedidos" id="botao-canto-superior-direito" class="btn btn-secondary">Voltar</a>
     <div class="pagetitle">
-      <h1>Lista de Produtos</h1>
+      <h1>Dados da Empresa</h1>
     </div><!-- End Page Title -->
     @if(session('success'))
         <div class="alert alert-success">
@@ -45,15 +44,15 @@
                             </button>
 
                             <div class="modal fade" id="smallModal" tabindex="-1">
-                                <div class="modal-dialog">
+                                <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Crie um novo Produto</h5>
+                                            <h5 class="modal-title">Crie os dados da Empresa</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <!-- Adicione o formulário aqui -->
-                                            <form method="POST" action="{{ route('produtos.store') }}" enctype="multipart/form-data">
+                                            <form method="POST" action="{{ route('empresa.store') }}" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="col-md-12">
                                                     <div class="row">
@@ -65,40 +64,8 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Tipo</label>
-                                                                <select class="form-control" id="tipo" name="tipo">
-                                                                    <option disabled selected required>Escolha
-                                                                    </option>
-                                                                    <option value="1">Salgado</option>
-                                                                    <option value="2">Bebida</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="inputText">Preço</label>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text">R$</span>
-                                                                    </div>
-                                                                    <input type="text" class="form-control" id="preco" name="preco" onblur="formatarPreco()">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
                                                             <label for="inputText">Imagem</label>
                                                                 <input class="form-control" type="file" name="imagem">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="inputText">Descrição</label>
-                                                                <input type="text" class="form-control" id="inputText" name="descricao">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -119,22 +86,20 @@
                                 <tr>
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Preço</th>
-                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Logo</th>
                                     <th scope="col">Excluir</th>
                                     <th scope="col">Detalhes</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($produtos as $produto)
+                                @forelse ($empresas as $empresa)
 
                                     <tr>
-                                        <td scope="row">{{ $produto->id }}</td>
-                                        <td>{{ $produto->nome }}</td>
-                                        <td>R${{ $produto->preco }}</td>
-                                        <td>{{ $produto->descricao }}</td>
+                                        <td scope="row">{{ $empresa->id }}</td>
+                                        <td>{{ $empresa->nome }}</td>
+                                        <td>{{ $empresa->imagem }}</td>
                                         <td>
-                                            <form action="{{ route('produtos.destroy', $produto->id) }}" method="post"
+                                            <form action="{{ route('empresa.destroy', $empresa->id) }}" method="post"
                                                 class="ms-2">
                                                 @csrf
                                                 @method('DELETE')
@@ -146,22 +111,22 @@
                                         <td>
                                             <div>
                                                 <!-- Botão de edição que abre o modal -->
-                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{ $produto->id }}">
+                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{ $empresa->id }}">
                                                     Editar
                                                 </button>
                                             </div>
 
                                             <!-- Modal de edição para cada investimento -->
-                                            <div class="modal fade" id="editModal{{ $produto->id }}" tabindex="-1">
-                                                <div class="modal-dialog">
+                                            <div class="modal fade" id="editModal{{ $empresa->id }}" tabindex="-1">
+                                                <div class="modal-dialog modal-sm">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Editar produto</h5>
+                                                            <h5 class="modal-title">Editar Dados da Empresa</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Formulário de edição para este produto -->
-                                                            <form method="POST" action="{{ route('produtos.update', ['id' => $produto->id]) }}" enctype="multipart/form-data">
+                                                            <!-- Formulário de edição para este tipoProd -->
+                                                            <form method="POST" action="{{ route('empresa.update', ['id' => $empresa->id]) }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="col-md-12">
@@ -169,34 +134,13 @@
                                                                         <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Nome</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="nome" value="{{ $produto->nome }}">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="inputText">Preço</label>
-                                                                                <div class="input-group mb-3">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <span class="input-group-text">R$</span>
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control" id="preco2" name="preco" onblur="formatarPreco2()" value="{{ $produto->preco }}">
-                                                                                </div>
+                                                                                <input type="text" class="form-control" id="inputText" name="nome" value="{{ $empresa->nome }}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Imagem</label>
-                                                                                <input type="file" class="form-control" id="inputText" name="imagem" value="{{ $produto->imagem }}">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="inputText">Descrição</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="descricao" value="{{ $produto->descricao }}">
+                                                                                <input type="file" class="form-control" id="inputText" name="imagem" value="{{ $empresa->imagem }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -213,7 +157,7 @@
                                             <!-- Fim do modal de edição -->
                                         </td>
                                     @empty
-                                        <p class="alert-warning" style="font-size:22px; text-align:center;">Nenhum Tipo de Produto Cadastrado</p>
+                                        <p class="alert-warning" style="font-size:22px; text-align:center;">Nenhum Dados da Empresa Cadastrado</p>
 
                                     </tr>
 

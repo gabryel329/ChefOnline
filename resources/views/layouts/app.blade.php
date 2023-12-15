@@ -11,10 +11,14 @@
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <link rel="shortcut icon" href="images/logo1.png" type="">
+        @php
+            $empresa = \App\Models\empresa::first();
+        @endphp
+        @if($empresa)
+            <link rel="shortcut icon" href="{{ asset($empresa->imagem) }}" type="">
 
-        <title> ChefOnline </title>
-
+            <title>{{ $empresa->nome }}</title>
+        @endif
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
 

@@ -20,4 +20,9 @@ class Produto extends Model
                     ->withPivot('quantidade')
                     ->withTimestamps();
     }
+
+    public function tipo()
+    {
+        return $this->belongsTo(tipoProd::class, 'tipo');
+    }
 }

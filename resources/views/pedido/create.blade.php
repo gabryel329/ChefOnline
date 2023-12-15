@@ -24,15 +24,16 @@ input{
 @endif
 <section class="food_section layout_padding">
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; aspect-ratio:3/2; object-fit: contain;" src="{{ asset('images/logo2.png') }}"></h2>
+            <h2><img style="width: 40%; aspect-ratio:3/2; object-fit: contain;" src="{{ optional($empresa)->imagem }}"></h2>
         </div>
         <div class="col-mt-2">
             <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button">AVANÇAR</button>
         </div>
         <ul class="filters_menu">
             <li class="active" data-filter="*">Todos</li>
-            <li data-filter="1">Salgados</li>
-            <li data-filter="2">Bebidas</li>
+            @foreach ($tipos as $tipo)
+                <li data-filter="{{ $tipo->id }}">{{ $tipo->tipo }}</li>
+            @endforeach
         </ul>
         <div class="filters-content">
             <form id="meuForm" action="{{ route('pedidos.store') }}" method="POST">
@@ -54,7 +55,8 @@ input{
                                         <div class="col-12" style="align-items: center">
                                             <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
                                             <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
-                                            <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button> <span id="porcao-text{{ $produto->id }}"></span>
+                                            <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button>
+                                            {{-- <span id="porcao-text{{ $produto->id }}"></span> --}}
                                             <input type="hidden" id="prod{{ $produto->id }}" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                         </div>
                                     </div>
@@ -96,28 +98,28 @@ input{
         });
     });
 
-    function qtdporcao(index, ref) {
-        var qtd = document.getElementById("qtd" + index).value;
-        var prod = document.getElementById("prod" + index).value;
+    // function qtdporcao(index, ref) {
+    //     var qtd = document.getElementById("qtd" + index).value;
+    //     var prod = document.getElementById("prod" + index).value;
 
-        console.log("prod:", prod);
+    //     console.log("prod:", prod);
 
-        if (ref == 0) {
-            qtd = parseInt(qtd) - 1;
-        } else {
-            qtd = parseInt(qtd) + 1;
-        }
+    //     if (ref == 0) {
+    //         qtd = parseInt(qtd) - 1;
+    //     } else {
+    //         qtd = parseInt(qtd) + 1;
+    //     }
 
-        if (qtd > 1 && (parseInt(prod) != 7 && parseInt(prod) != 8 && parseInt(prod) != 9)) {
-            document.getElementById("porcao-text" + index).innerHTML = "- Porções";
-        } else if (qtd <= 1 && (parseInt(prod) != 7 && parseInt(prod) != 8 && parseInt(prod) != 9)) {
-            document.getElementById("porcao-text" + index).innerHTML = "- Porção";
-        } else if (qtd > 1 && (parseInt(prod) == 7 || parseInt(prod) == 8 || parseInt(prod) == 9)) {
-            document.getElementById("porcao-text" + index).innerHTML = "- Unds";
-        } else if (qtd <= 1 && (parseInt(prod) == 7 || parseInt(prod) == 8 || parseInt(prod) == 9)) {
-            document.getElementById("porcao-text" + index).innerHTML = "- Und";
-        }
-    }
+    //     if (qtd > 1 && (parseInt(prod) != 7 && parseInt(prod) != 8 && parseInt(prod) != 9)) {
+    //         document.getElementById("porcao-text" + index).innerHTML = "- Porções";
+    //     } else if (qtd <= 1 && (parseInt(prod) != 7 && parseInt(prod) != 8 && parseInt(prod) != 9)) {
+    //         document.getElementById("porcao-text" + index).innerHTML = "- Porção";
+    //     } else if (qtd > 1 && (parseInt(prod) == 7 || parseInt(prod) == 8 || parseInt(prod) == 9)) {
+    //         document.getElementById("porcao-text" + index).innerHTML = "- Unds";
+    //     } else if (qtd <= 1 && (parseInt(prod) == 7 || parseInt(prod) == 8 || parseInt(prod) == 9)) {
+    //         document.getElementById("porcao-text" + index).innerHTML = "- Und";
+    //     }
+    // }
 
     document.addEventListener('DOMContentLoaded', function() {
     let addBtns = document.querySelectorAll('.add');

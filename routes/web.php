@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\TipoProdController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,20 @@ Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
     Route::post('produtos', [ProdutoController::class, 'store'])->name('produtos.store');
     Route::put('produtos/{id}', [ProdutoController::class, 'update'])->name('produtos.update');
     Route::delete('produtos/{id}', [ProdutoController::class, 'destroy'])->name('produtos.destroy');
+
+    #Tipos de Produtos
+    Route::get('tipoProd', [TipoProdController::class, 'index'])->name('tipoProd.index');
+    Route::get('tipoProd/{id}', [TipoProdController::class, 'show'])->name('tipoProd.show');
+    Route::post('tipoProd', [TipoProdController::class, 'store'])->name('tipoProd.store');
+    Route::put('tipoProd/{id}', [TipoProdController::class, 'update'])->name('tipoProd.update');
+    Route::delete('tipoProd/{id}', [TipoProdController::class, 'destroy'])->name('tipoProd.destroy');
+
+    #Empresa
+    Route::get('Empresa', [EmpresaController::class, 'index'])->name('empresa.index');
+    Route::get('Empresa/{id}', [EmpresaController::class, 'show'])->name('empresa.show');
+    Route::post('Empresa', [EmpresaController::class, 'store'])->name('empresa.store');
+    Route::put('Empresa/{id}', [EmpresaController::class, 'update'])->name('empresa.update');
+    Route::delete('Empresa/{id}', [EmpresaController::class, 'destroy'])->name('empresa.destroy');
 });
 
 #Processo Checkout

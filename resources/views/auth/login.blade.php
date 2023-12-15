@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,9 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Login - ChefOnline</title>
+    @if(isset($empresa))
+        <title>Login - {{ $empresa->nome }}</title>
+    @endif
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -20,7 +23,9 @@
     <form class="login-form" method="POST" action="{{ route('login') }}">
       @csrf
       <div class="card p-4" style="background-image: linear-gradient(to bottom right, red, yellow);">
-        <h1 class="h3 mb-3 fw-normal">ChefOnline</h1>
+        @if(isset($empresa))
+            <h1 class="h3 mb-3 fw-normal">{{ $empresa->nome }}</h1>
+        @endif
 
         <div class="form-floating mb-3">
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>

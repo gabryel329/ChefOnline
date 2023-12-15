@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produto;
+use App\Models\empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProdutoController extends Controller
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $produtos = Produto::all();
-        return view('produto.lista', compact('produtos'));
+        $empresas = empresa::all();
+        return view('empresa.index', compact('empresas'));
     }
 
     /**
@@ -25,18 +25,18 @@ class ProdutoController extends Controller
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $nome = strtoupper($request->input('nome'));
-        $preco = $request->input('preco');
-        $tipo = strtoupper($request->input('tipo'));
-        $descricao = $request->input('descricao');
+        $nome = $request->input('nome');
         $imagem = $request->file('imagem');
 
-        $existingProduto = Produto::where('nome', $nome)->first();
+        $existingEmpresa = empresa::where('nome', $nome)->first();
 
-        if ($existingProduto) {
-            return redirect()->route('produtos.index')->with('error', 'Nome de Produto já existe');
+        if ($existingEmpresa) {
+            return redirect()->route('empresa.index')->with('error', 'Nome da Empresa já existe');
         }
 
         if ($imagem && $imagem->isValid()) {
@@ -47,36 +47,30 @@ class ProdutoController extends Controller
             // Get just ext
             $extension = $imagem->getClientOriginalExtension();
             // Filename to store
-            $imageName = $filename.'.'.$extension;
+            $imageName = 'images/'.$filename.'.'.$extension;
 
             // Upload Image to the 'public/images/' directory
             $imagem->move(public_path('images/'), $imageName);
 
             // Adicione o caminho da imagem aos dados que você está inserindo no banco de dados
-            $produto = Produto::create([
+            $empresa = empresa::create([
                 'nome' => $nome,
-                'tipo' => $tipo,
-                'preco' => $preco,
-                'descricao' => $descricao,
                 'imagem' => $imageName, // Salva o nome da imagem com a extensão no banco de dados
             ]);
         } else {
             // Se nenhuma imagem foi enviada, crie o produto sem o campo de imagem
-            $produto = Produto::create([
+            $empresa = empresa::create([
                 'nome' => $nome,
-                'tipo' => $tipo,
-                'preco' => $preco,
-                'descricao' => $descricao,
             ]);
         }
 
-        return redirect()->route('produtos.index')->with('success', 'Produto criado com sucesso');
+        return redirect()->route('empresa.index')->with('success', 'Empresa criada com sucesso');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Produto $produto)
+    public function show(empresa $empresa)
     {
         //
     }
@@ -84,28 +78,28 @@ class ProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Produto $produto)
+    public function edit(empresa $empresa)
     {
         //
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         // Valide os dados do formulário conforme necessário
 
         // Encontre o produto no banco de dados
-        $produto = Produto::find($id);
+        $empresas = empresa::find($id);
 
         // Verifique se o produto existe
-        if (!$produto) {
-            return redirect()->back()->with('error', 'Produto não encontrado');
+        if (!$empresas) {
+            return redirect()->back()->with('error', 'Empresa não encontrado');
         }
 
         // Atualize os campos do produto
-        $produto->nome = strtoupper($request->input('nome'));
-        $produto->tipo = strtoupper($request->input('tipo'));
-        $produto->preco = $request->input('preco');
-        $produto->descricao = $request->input('descricao');
+        $empresas->nome = strtoupper($request->input('nome'));
 
         // Verifique se uma nova imagem foi enviada
         $novaImagem = $request->file('imagem');
@@ -117,33 +111,31 @@ class ProdutoController extends Controller
             $novaImagem->move(public_path('images/'), $imageName);
 
             // Exclua a imagem antiga se existir
-            if ($produto->imagem) {
+            if ($empresas->imagem) {
                 // Certifique-se de incluir a declaração 'use Illuminate\Support\Facades\Storage;' no topo do arquivo
-                Storage::delete($produto->imagem);
+                Storage::delete($empresas->imagem);
             }
 
             // Atualize o caminho da imagem no banco de dados
-            $produto->imagem = $imageName;
+            $empresas->imagem = $imageName;
         }
 
         // Salve as alterações
-        $produto->save();
+        $empresas->save();
 
         // Redirecione de volta à página de origem com uma mensagem de sucesso
-        return redirect()->back()->with('success', 'Produto atualizado com sucesso');
+        return redirect()->back()->with('success', 'Empresa atualizada com sucesso');
     }
-
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $produto = Produto::findOrFail($id);
+        $empresa = empresa::findOrFail($id);
 
-        $produto->delete();
+        $empresa->delete();
 
-        return redirect()->route('produtos.index')->with('error', 'Lançamento excluído com sucesso');
+        return redirect()->route('empresa.index')->with('error', 'Empresa excluída com sucesso');
     }
 }
