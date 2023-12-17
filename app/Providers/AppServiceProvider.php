@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\empresa;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View as ViewView;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $empresa = empresa::first();
-        view()->share('empresa', $empresa);
+
     }
 }

@@ -48,7 +48,15 @@
             </ul>
         </div>
         <div class="heading_container heading_center">
-            <h2><img style="width: 40%; aspect-ratio:3/2; object-fit: contain;" src="{{ optional($empresa)->imagem }}"></h2>
+            @php
+                $empresa = \App\Models\empresa::first();
+            @endphp
+
+            @if($empresa)
+                <h2>
+                    <img style="width: 40%; aspect-ratio: 3/2; object-fit: contain;" src="{{ asset('images/' . $empresa->imagem) }}">
+                </h2>
+            @endif
         </div>
         <div class="row filters_menu">
             <div class="col-md-12">

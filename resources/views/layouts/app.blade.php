@@ -14,11 +14,12 @@
         @php
             $empresa = \App\Models\empresa::first();
         @endphp
-        @if($empresa)
-            <link rel="shortcut icon" href="{{ asset($empresa->imagem) }}" type="">
 
+        @if($empresa)
+            <link rel="shortcut icon" href="{{ asset('images/' . $empresa->imagem) }}" type="image/png">
             <title>{{ $empresa->nome }}</title>
         @endif
+
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" />
 

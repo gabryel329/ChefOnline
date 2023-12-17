@@ -120,6 +120,7 @@
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Preço</th>
+                                    <th scope="col">Estoque (S/N)</th>
                                     <th scope="col">Descrição</th>
                                     <th scope="col">Excluir</th>
                                     <th scope="col">Detalhes</th>
@@ -132,6 +133,7 @@
                                         <td scope="row">{{ $produto->id }}</td>
                                         <td>{{ $produto->nome }}</td>
                                         <td>R${{ $produto->preco }}</td>
+                                        <td style="text-align: center">{{ $produto->mostrar }}</td>
                                         <td>{{ $produto->descricao }}</td>
                                         <td>
                                             <form action="{{ route('produtos.destroy', $produto->id) }}" method="post"
@@ -166,10 +168,16 @@
                                                                 @method('PUT')
                                                                 <div class="col-md-12">
                                                                     <div class="row">
-                                                                        <div class="col-md-12">
+                                                                        <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Nome</label>
                                                                                 <input type="text" class="form-control" id="inputText" name="nome" value="{{ $produto->nome }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="inputText">Tipo</label>
+                                                                                <input type="text" class="form-control" id="inputText" name="tipo" value="{{ $produto->tipo }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -193,10 +201,16 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-md-12">
+                                                                        <div class="col-md-8">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Descrição</label>
                                                                                 <input type="text" class="form-control" id="inputText" name="descricao" value="{{ $produto->descricao }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="inputText">Estoque (S/N)</label>
+                                                                                <input type="text" class="form-control" id="inputText" name="mostrar" value="{{ $produto->mostrar }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>

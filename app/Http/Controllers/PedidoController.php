@@ -22,7 +22,7 @@ class PedidoController extends Controller
     public function index()
     {
         $empresa = \App\Models\empresa::first();
-        $produtos = Produto::all();
+        $produtos = Produto::where('mostrar', 'S')->get();
         $tipos = tipoProd::all();
         return view('pedido.create', compact(['produtos', 'tipos', 'empresa']));
     }

@@ -40,14 +40,13 @@ class EmpresaController extends Controller
         }
 
         if ($imagem && $imagem->isValid()) {
-            // Get filename with the extension
             $filenameWithExt = $imagem->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $imagem->getClientOriginalExtension();
-            // Filename to store
-            $imageName = 'images/'.$filename.'.'.$extension;
+                // Get just filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just ext
+                $extension = $imagem->getClientOriginalExtension();
+                // Filename to store
+                $imageName = $filename.'.'.$extension;
 
             // Upload Image to the 'public/images/' directory
             $imagem->move(public_path('images/'), $imageName);
@@ -64,8 +63,12 @@ class EmpresaController extends Controller
             ]);
         }
 
-        return redirect()->route('empresa.index')->with('success', 'Empresa criada com sucesso');
+        // Retrieve the company data, including the logo, after it has been saved
+        $empresa = empresa::first();
+
+        return redirect()->route('empresa.index')->with('success', 'Empresa criada com sucesso')->with('empresa', $empresa);
     }
+
 
     /**
      * Display the specified resource.

@@ -56,6 +56,7 @@ class ProdutoController extends Controller
             $produto = Produto::create([
                 'nome' => $nome,
                 'tipo' => $tipo,
+                'mostrar' => 'S',
                 'preco' => $preco,
                 'descricao' => $descricao,
                 'imagem' => $imageName, // Salva o nome da imagem com a extensão no banco de dados
@@ -65,6 +66,7 @@ class ProdutoController extends Controller
             $produto = Produto::create([
                 'nome' => $nome,
                 'tipo' => $tipo,
+                'mostrar' => 'S',
                 'preco' => $preco,
                 'descricao' => $descricao,
             ]);
@@ -105,6 +107,7 @@ class ProdutoController extends Controller
         $produto->nome = strtoupper($request->input('nome'));
         $produto->tipo = strtoupper($request->input('tipo'));
         $produto->preco = $request->input('preco');
+        $produto->mostrar = strtoupper($request->input('mostrar'));
         $produto->descricao = $request->input('descricao');
 
         // Verifique se uma nova imagem foi enviada
