@@ -7,7 +7,11 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-    @if(isset($empresa))
+    @php
+        $empresa = \App\Models\empresa::first();
+    @endphp
+
+    @if($empresa)
         <title>Login - {{ $empresa->nome }}</title>
     @endif
 
@@ -23,7 +27,7 @@
     <form class="login-form" method="POST" action="{{ route('login') }}">
       @csrf
       <div class="card p-4" style="background-image: linear-gradient(to bottom right, red, yellow);">
-        @if(isset($empresa))
+        @if($empresa)
             <h1 class="h3 mb-3 fw-normal">{{ $empresa->nome }}</h1>
         @endif
 
