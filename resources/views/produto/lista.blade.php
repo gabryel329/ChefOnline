@@ -243,31 +243,32 @@
 </main>
 <script>
     function formatarPreco() {
-      var precoInput = document.getElementById('preco');
-      var precoValue = precoInput.value;
+        var precoInput = document.getElementById('preco');
+        var precoValue = precoInput.value;
 
-      // Remover espaços em branco e substituir vírgulas por pontos
-      precoValue = precoValue.replace(/\s/g, '').replace('.', ',');
+        // Remover espaços em branco e substituir vírgulas por pontos
+        precoValue = precoValue.replace(/\s/g, '').replace(',', '.');
 
-      // Converter para número com duas casas decimais
-      precoValue = parseFloat(precoValue).toFixed(2);
+        // Converter para número e dividir por 100 (assumindo que o valor original é em centavos)
+        precoValue = parseFloat(precoValue / 100).toFixed(2);
 
-      // Atualizar o valor no input
-      precoInput.value = precoValue;
+        // Atualizar o valor no input
+        precoInput.value = precoValue;
     }
 
     function formatarPreco2() {
-      var precoInput = document.getElementById('preco2');
-      var precoValue = precoInput.value;
+        var precoInput = document.getElementById('preco2');
+        var precoValue = precoInput.value;
 
-      // Remover espaços em branco e substituir vírgulas por pontos
-      precoValue = precoValue.replace(/\s/g, '').replace('.', ',');
+        // Remover espaços em branco e substituir vírgulas por pontos
+        precoValue = precoValue.replace(/\s/g, '').replace(',', '.');
 
-      // Converter para número com duas casas decimais
-      precoValue = parseFloat(precoValue).toFixed(2);
+        // Converter para número e dividir por 100 (assumindo que o valor original é em centavos)
+        precoValue = parseFloat(precoValue / 100).toFixed(2);
 
-      // Atualizar o valor no input
-      precoInput.value = precoValue;
+        // Atualizar o valor no input
+        precoInput.value = precoValue;
     }
+
 </script>
 @endsection
