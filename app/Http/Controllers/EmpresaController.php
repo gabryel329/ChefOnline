@@ -102,7 +102,7 @@ class EmpresaController extends Controller
         }
 
         // Atualize os campos do produto
-        $empresas->nome = strtoupper($request->input('nome'));
+        $empresas->nome = $request->input('nome');
 
         // Verifique se uma nova imagem foi enviada
         $novaImagem = $request->file('imagem');

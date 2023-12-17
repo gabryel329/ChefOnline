@@ -27,7 +27,7 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-        $nome = strtoupper($request->input('nome'));
+        $nome = $request->input('nome');
         $preco = $request->input('preco');
         $tipo = strtoupper($request->input('tipo'));
         $descricao = $request->input('descricao');
@@ -104,7 +104,7 @@ class ProdutoController extends Controller
         }
 
         // Atualize os campos do produto
-        $produto->nome = strtoupper($request->input('nome'));
+        $produto->nome = $request->input('nome');
         $produto->tipo = strtoupper($request->input('tipo'));
         $produto->preco = $request->input('preco');
         $produto->mostrar = strtoupper($request->input('mostrar'));
