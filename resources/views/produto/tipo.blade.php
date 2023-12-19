@@ -59,7 +59,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="inputText">Nome</label>
-                                                                <input type="text" class="form-control" id="inputText" name="nome">
+                                                                <input type="text" class="form-control" id="inputText" name="tipo">
                                                             </div>
                                                         </div>
                                                     </div>

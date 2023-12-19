@@ -20,16 +20,16 @@ class TipoProdController extends Controller
 
     public function store(Request $request)
     {
-        $nome = strtoupper($request->input('nome'));
+        $tipo = strtoupper($request->input('tipo'));
 
-        $existingTipoProduto = tipoProd::where('nome', $nome)->first();
+        $existingTipoProduto = tipoProd::where('tipo', $tipo)->first();
 
         if ($existingTipoProduto) {
             return redirect()->route('tipoProd.index')->with('error', 'Nome do Tipo do Produto já existe');
         }
 
         $tipo = tipoProd::create([
-            'nome' => $nome,
+            'tipo' => $tipo,
         ]);
 
         return redirect()->route('tipoProd.index')->with('success', 'Tipo do Produto criado com sucesso');
@@ -43,7 +43,7 @@ class TipoProdController extends Controller
             return redirect()->back()->with('error', 'Tipo de Produto não encontrado');
         }
 
-        $tipo->nome = strtoupper($request->input('nome'));
+        $tipo->tipo = strtoupper($request->input('tipo'));
 
         $tipo->save();
 
