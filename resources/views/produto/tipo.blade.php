@@ -126,7 +126,7 @@
                                                                         <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 <label for="inputText">Nome</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="nome" value="{{ $tipoProd->tipo }}">
+                                                                                <input type="text" class="form-control" id="inputText" name="tipo" value="{{ $tipoProd->tipo }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>

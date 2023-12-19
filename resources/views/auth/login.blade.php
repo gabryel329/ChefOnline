@@ -28,7 +28,7 @@
       @csrf
       <div class="card p-4" style="background-image: linear-gradient(to bottom right, red, yellow);">
         @if($empresa)
-            <h1 class="h3 mb-3 fw-normal">{{ $empresa->nome }}</h1>
+            <h1 class="h3 mb-3 fw-normal" style="color: white;">{{ $empresa->nome }}</h1>
         @endif
 
         <div class="form-floating mb-3">
