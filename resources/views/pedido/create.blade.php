@@ -271,10 +271,13 @@
             }
 
             function removeFromCart(name) {
-                const itemToRemove = document.querySelector(`#cart-items li[data-name="${name}"]`);
+                const itemToRemove = document.querySelector(`#cart-items tr[data-name="${name}"]`);
                 if (itemToRemove) {
                     itemToRemove.remove();
                 }
+
+                // Após remover, recalcular o total do carrinho
+                updateCartTotal();
             }
 
             function updateCartTotal() {
