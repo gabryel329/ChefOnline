@@ -7,11 +7,13 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
+
     @php
         $empresa = \App\Models\empresa::first();
     @endphp
 
     @if($empresa)
+        <link rel="shortcut icon" href="{{ asset('images/' . $empresa->imagem) }}" type="image/png">
         <title>Login - {{ $empresa->nome }}</title>
     @endif
 
