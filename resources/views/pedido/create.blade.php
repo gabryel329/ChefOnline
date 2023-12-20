@@ -16,7 +16,7 @@
         position: fixed;
         bottom: 20px;
         right: 10px;
-        background-color: #fff;
+        background-color: #f1f1f1;
         border: 1px solid #ccc;
         padding: 10px;
         border-radius: 5px;
@@ -29,27 +29,65 @@
         font-size: 13px;
     }
 
+    #cart {
+        border: 1px solid #ddd;
+        padding: 10px;
+        width: 300px; /* ou ajuste conforme necessário */
+    }
 
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-    #cart ul {
+    .cart-footer {
+        margin-top: 10px;
+        text-align: right;
+    }
+
+    #cart-items {
         list-style: none;
         padding: 0;
         margin: 0;
     }
 
-    #cart li {
-        margin-bottom: 10px;
+    #cart-items tr {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
     }
 
-    #cart li span {
-        margin-left: 10px;
+    #cart-items th,
+    #cart-items td {
+        padding: 10px;
     }
-    #cart h1 {
-    font-size: inherit; /* Use o tamanho de fonte padrão para h1 */
-}
+
+    #cart-items th {
+        text-align: left;
+        width: 33.33%;
+    }
+
+    .item-name {
+        width: 33.33%;
+    }
+
+    .item-quantity,
+    .item-subtotal {
+        width: 33.33%;
+        text-align: center;
+    }
+
+
+    .fas {
+    font-size: 24px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    }
+
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 @section('content')
     @if(session('success'))
@@ -191,17 +229,44 @@
             function addToCart(name, quantity, productPrice, subtotal) {
                 const truncatedName = name.length > 12 ? name.substring(0, 12) + '...' : name;
 
-                const existingItem = document.querySelector(`#cart-items li[data-name="${name}"]`);
+                // Verificar se o item já existe na tabela
+                const existingItem = document.querySelector(`#cart-items tr[data-name="${name}"]`);
+
+                // Criar uma nova linha (<tr>) para o item
+                const row = document.createElement('tr');
+                row.dataset.name = name;
+
+                // Adicionar células (<td>) à linha
+                const nameCell = document.createElement('td');
+                nameCell.classList.add('item-name');
+                nameCell.innerHTML = `<strong>${truncatedName}</strong>`;
+                row.appendChild(nameCell);
+
+                const quantityCell = document.createElement('td');
+                quantityCell.classList.add('item-quantity');
+                quantityCell.innerHTML = `<strong><span class="quantity">${quantity}</span></strong>`;
+                row.appendChild(quantityCell);
+
+                const subtotalCell = document.createElement('td');
+                subtotalCell.classList.add('item-subtotal');
+                subtotalCell.innerHTML = `<strong style="color: red;"><span class="subtotal">R$${subtotal.toFixed(2)}</span></strong>`;
+                row.appendChild(subtotalCell);
+
+                // Adicionar a nova linha à tabela
                 if (existingItem) {
-                    existingItem.querySelector('span.quantity').innerText = quantity;
-                    existingItem.querySelector('span.subtotal').innerText = subtotal.toFixed(2);
+                    // Atualizar a linha existente
+                    existingItem.innerHTML = row.innerHTML;
                 } else {
-                    const li = document.createElement('li');
-                    li.dataset.name = name;
-                    li.innerHTML = `${truncatedName}<span class="quantity">${quantity}</span>R$<span class="subtotal">${subtotal.toFixed(2)}</span>`;
-                    cartItems.appendChild(li);
+                    // Adicionar uma nova linha ao final da tabela
+                    const tbody = document.getElementById('cart-items');
+                    tbody.appendChild(row);
                 }
 
+                // Calcular e exibir o total do carrinho
+                updateCartTotal();
+
+                // Exibir o carrinho
+                const cart = document.getElementById('cart');
                 cart.style.display = 'block';
             }
 
@@ -213,18 +278,17 @@
             }
 
             function updateCartTotal() {
-                const subtotals = document.querySelectorAll('#cart-items li .subtotal');
+                const cartItems = document.querySelectorAll('#cart-items tr');
                 let total = 0;
 
-                subtotals.forEach(subtotal => {
-                    const subtotalValue = parseFloat(subtotal.innerText);
-
-                    if (!isNaN(subtotalValue)) {
-                        total += subtotalValue;
-                    }
+                cartItems.forEach(item => {
+                    const subtotal = parseFloat(item.querySelector('.item-subtotal .subtotal').innerText.replace('R$', ''));
+                    total += subtotal;
                 });
 
-                cartTotal.innerText = total.toFixed(2);
+                // Atualizar o total do carrinho
+                const cartTotalElement = document.getElementById('cart-total');
+                cartTotalElement.innerText = total.toFixed(2);
             }
 
 
@@ -254,9 +318,15 @@
 
     <!-- Carrinho de Compras -->
     <div id="cart">
-        <h2>Carrinho</h2>
-        <ul id="cart-items"></ul>
-        <hr>
-        <strong>Total: R$<span id="cart-total">0.00</span></strong>
+        <i class="fas fa-shopping-cart"></i>
+        <div class="cart-header">
+            <ul id="cart-items">
+            </ul>
+        </div>
+        <div class="cart-footer">
+            <strong>Total: <span style="color: red">R$</span><span id="cart-total" style="color: red">0.00</span></strong>
+        </div>
     </div>
+
+
 @endsection
