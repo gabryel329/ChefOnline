@@ -91,7 +91,7 @@
                 @csrf
                 <div class="row grid">
                     @foreach($produtos as $produto)
-                        <div class="col-sm-3 filter-item" data-tipo="{{ $produto->tipo }}">
+                        <div class="col-sm-3 filter-item" data-tipo="{{ $produto->tipo }}" data-preco="{{ $produto->preco }}">
                             <div class="box">
                                 <div>
                                     <div class="img-box">
@@ -174,12 +174,12 @@
 
             function updateCart(index) {
                 let productName = document.querySelectorAll('.detail-box h5')[index].innerText;
-                let productPrice = parseFloat(document.querySelectorAll('.options h6')[index].innerText.split('R$')[1]);
+                let productPrice = parseFloat(document.querySelectorAll('.filter-item')[index].getAttribute('data-preco'));
                 let quantity = parseInt(qtyInputs[index].value);
                 let subtotal = quantity * productPrice;
 
                 if (quantity > 0) {
-                    addToCart(productName, quantity, subtotal);
+                    addToCart(productName, quantity, productPrice, subtotal);
                 } else {
                     removeFromCart(productName);
                 }
@@ -188,23 +188,22 @@
                 habilitarBotaoAvancar();
             }
 
-            function addToCart(name, quantity, subtotal) {
+            function addToCart(name, quantity, productPrice, subtotal) {
                 const truncatedName = name.length > 12 ? name.substring(0, 12) + '...' : name;
 
                 const existingItem = document.querySelector(`#cart-items li[data-name="${name}"]`);
                 if (existingItem) {
                     existingItem.querySelector('span.quantity').innerText = quantity;
-                    existingItem.querySelector('span.subtotal').innerText = (quantity * subtotal).toFixed(2);
+                    existingItem.querySelector('span.subtotal').innerText = subtotal.toFixed(2);
                 } else {
                     const li = document.createElement('li');
                     li.dataset.name = name;
-                    li.innerHTML = `${truncatedName}<span class="quantity">${quantity}</span>R$<span class="subtotal">${(quantity * subtotal).toFixed(2)}</span>`;
+                    li.innerHTML = `${truncatedName}<span class="quantity">${quantity}</span>R$<span class="subtotal">${subtotal.toFixed(2)}</span>`;
                     cartItems.appendChild(li);
                 }
 
                 cart.style.display = 'block';
             }
-
 
             function removeFromCart(name) {
                 const itemToRemove = document.querySelector(`#cart-items li[data-name="${name}"]`);
