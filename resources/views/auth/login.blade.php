@@ -28,9 +28,9 @@
   <main class="form-signin">
     <form class="login-form" method="POST" action="{{ route('login') }}">
       @csrf
-      <div class="card p-4" style="background-image: linear-gradient(to bottom right, red, yellow);">
+      <div class="card p-4">
         @if($empresa)
-            <h1 class="h3 mb-3 fw-normal" style="color: white;">{{ $empresa->nome }}</h1>
+            <h1 class="h3 mb-3 fw-normal">{{ $empresa->nome }}</h1>
         @endif
 
         <div class="form-floating mb-3">
@@ -54,10 +54,6 @@
         </div>
 
         <button style="background-color: #ff0000;" type="submit" class="btn btn-danger">{{ __('Entrar') }}</button> <!-- Alterado para btn-danger -->
-        <br>
-        <footer class="container-fluid footer">
-            <p style="color: black">&copy; 2023–2023 Grupo GB Software, Inc.</p>
-        </footer>
       </div>
     </form>
   </main>
