@@ -194,16 +194,17 @@
                 const existingItem = document.querySelector(`#cart-items li[data-name="${name}"]`);
                 if (existingItem) {
                     existingItem.querySelector('span.quantity').innerText = quantity;
-                    existingItem.querySelector('span.subtotal').innerText = subtotal.toFixed(2);
+                    existingItem.querySelector('span.subtotal').innerText = (quantity * subtotal).toFixed(2);
                 } else {
                     const li = document.createElement('li');
                     li.dataset.name = name;
-                    li.innerHTML = `<span class="quantity">${quantity}-</span>${truncatedName}<span class="subtotal">R$${subtotal.toFixed(2)}</span>`;
+                    li.innerHTML = `${truncatedName}<span class="quantity">${quantity}</span>R$<span class="subtotal">${(quantity * subtotal).toFixed(2)}</span>`;
                     cartItems.appendChild(li);
                 }
 
                 cart.style.display = 'block';
             }
+
 
             function removeFromCart(name) {
                 const itemToRemove = document.querySelector(`#cart-items li[data-name="${name}"]`);
@@ -217,11 +218,16 @@
                 let total = 0;
 
                 subtotals.forEach(subtotal => {
-                    total += parseFloat(subtotal.innerText);
+                    const subtotalValue = parseFloat(subtotal.innerText);
+
+                    if (!isNaN(subtotalValue)) {
+                        total += subtotalValue;
+                    }
                 });
 
                 cartTotal.innerText = total.toFixed(2);
             }
+
 
             function habilitarBotaoAvancar() {
                 let qtyInputs = document.querySelectorAll('.qtyBox');
