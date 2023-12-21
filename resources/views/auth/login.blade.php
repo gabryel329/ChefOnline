@@ -30,7 +30,7 @@
       @csrf
       <div class="card p-4">
         @if($empresa)
-            <h1 class="h3 mb-3 fw-normal">{{ $empresa->nome }}</h1>
+            <h1 class="h3 mb-3 fw-normal"><img style="width: 40%; aspect-ratio: 3/2; object-fit: contain; margin-bottom: 10px" src="{{ asset('images/' . $empresa->imagem) }}"></h1>
         @endif
 
         <div class="form-floating mb-3">

@@ -31,6 +31,11 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         $nome = $request->input('nome');
+        $telefone = $request->input('telefone');
+        $email = $request->input('email');
+        $dias = $request->input('dias');
+        $horario = $request->input('horario');
+        $instagram = $request->input('instagram');
         $imagem = $request->file('imagem');
 
         $existingEmpresa = empresa::where('nome', $nome)->first();
@@ -54,12 +59,22 @@ class EmpresaController extends Controller
             // Adicione o caminho da imagem aos dados que você está inserindo no banco de dados
             $empresa = empresa::create([
                 'nome' => $nome,
+                'telefone' => $telefone,
+                'email' => $email,
+                'instagram' => $instagram,
+                'dias' => $dias,
+                'horario' => $horario,
                 'imagem' => $imageName, // Salva o nome da imagem com a extensão no banco de dados
             ]);
         } else {
             // Se nenhuma imagem foi enviada, crie o produto sem o campo de imagem
             $empresa = empresa::create([
                 'nome' => $nome,
+                'telefone' => $telefone,
+                'email' => $email,
+                'instagram' => $instagram,
+                'dias' => $dias,
+                'horario' => $horario,
             ]);
         }
 
@@ -103,6 +118,11 @@ class EmpresaController extends Controller
 
         // Atualize os campos do produto
         $empresas->nome = $request->input('nome');
+        $empresas->telefone = $request->input('telefone');
+        $empresas->instagram = $request->input('instagram');
+        $empresas->email = $request->input('email');
+        $empresas->dias = $request->input('dias');
+        $empresas->horario = $request->input('horario');
 
         // Verifique se uma nova imagem foi enviada
         $novaImagem = $request->file('imagem');

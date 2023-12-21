@@ -110,7 +110,7 @@
 
             @if($empresa)
                 <h2>
-                    <img style="width: 40%; aspect-ratio: 3/2; object-fit: contain;" src="{{ asset('images/' . $empresa->imagem) }}">
+                    <img style="width: 40%; aspect-ratio: 3/2; object-fit: contain; margin-bottom: 10px; margin-top: 10px" src="{{ asset('images/' . $empresa->imagem) }}">
                 </h2>
             @endif
         </div>

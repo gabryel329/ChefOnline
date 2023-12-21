@@ -10,7 +10,7 @@
 
             @if($empresa)
                 <h2>
-                    <img style="width: 40%; aspect-ratio: 3/2; object-fit: contain;" src="{{ asset('images/' . $empresa->imagem) }}">
+                    <img style="width: 40%; aspect-ratio: 3/2; object-fit: contain; margin-top: 10px" src="{{ asset('images/' . $empresa->imagem) }}">
                 </h2>
             @endif
         </div>
@@ -107,7 +107,6 @@
         </div>
     </div>
 </section>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>

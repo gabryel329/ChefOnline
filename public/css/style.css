@@ -902,8 +902,9 @@ a:focus {
 .footer_section {
   background-color: #222831;
   color: #ffffff;
-  padding: 20px 0 40px 0;
+  padding: 75px 0 40px 0;
   text-align: center;
+  margin-top: 300px;
 }
 
 .footer_section h4 {
@@ -913,11 +914,16 @@ a:focus {
 .footer_section h4,
 .footer_section .footer-logo {
   font-weight: 600;
+  margin-bottom: 20px;
   font-family: 'Dancing Script', cursive;
 }
 
 .footer_section p {
   color: #dbdbdb;
+}
+
+.footer_section .footer-col {
+  margin-bottom: 30px;
 }
 
 .footer_section .footer_contact .contact_link_box {
@@ -931,10 +937,12 @@ a:focus {
 }
 
 .footer_section .footer_contact .contact_link_box a {
+  margin: 5px 0;
   color: #ffffff;
 }
 
 .footer_section .footer_contact .contact_link_box a i {
+  margin-right: 5px;
 }
 
 .footer_section .footer_contact .contact_link_box a:hover {
@@ -956,6 +964,8 @@ a:focus {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .footer_section .footer_social a {
@@ -974,6 +984,7 @@ a:focus {
   border-radius: 100%;
   background-color: #ffffff;
   border-radius: 100%;
+  margin: 0 2.5px;
   font-size: 18px;
 }
 
@@ -983,10 +994,12 @@ a:focus {
 
 .footer_section .footer-info {
   text-align: center;
+  margin-top: 25px;
 }
 
 .footer_section .footer-info p {
   color: #ffffff;
+  margin: 0;
 }
 
 .footer_section .footer-info p a {

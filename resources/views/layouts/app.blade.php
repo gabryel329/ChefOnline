@@ -44,40 +44,108 @@
 
     <body class="elegant-background">
         <div class="container">
-        @php
-            @session_start();
-        @endphp
+            @php
+                @session_start();
+            @endphp
 
-        @auth
-            @include('layouts.header')
-        @endauth
+            @auth
+                @include('layouts.header')
+            @endauth
 
-        @yield('content')
+            @yield('content')
 
-         <!-- jQery -->
-        <script src="js/jquery-3.4.1.min.js"></script>
-        <!-- popper js -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-        </script>
-        <!-- bootstrap js -->
-        <script src="js/bootstrap.js"></script>
-        <!-- owl slider -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-        </script>
-        <!-- isotope js -->
-        <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
-        <!-- nice select -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-        <!-- custom js -->
-        <script src="js/custom.js"></script>
-        <!-- Google Map -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+            <!-- jQery -->
+            <script src="js/jquery-3.4.1.min.js"></script>
+            <!-- popper js -->
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+            </script>
+            <!-- bootstrap js -->
+            <script src="js/bootstrap.js"></script>
+            <!-- owl slider -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+            </script>
+            <!-- isotope js -->
+            <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+            <!-- nice select -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+            <!-- custom js -->
+            <script src="js/custom.js"></script>
+            <!-- Google Map -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
 
-        </script>
-        <!-- End Google Map -->
+            </script>
+            <!-- End Google Map -->
 
-        @stack('scripts')
+            @stack('scripts')
         </div>
     </body>
-
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <div class="footer_contact">
+                        <h4>
+                            Contato
+                        </h4>
+                        <div class="contact_link_box">
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>
+                                    @if($empresa)
+                                        {{ $empresa->telefone }}
+                                    @endif
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>
+                                    @if($empresa)
+                                        {{ $empresa->email }}
+                                    @endif
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h4>
+                        <a href="" class="footer-logo">
+                            @if($empresa)
+                                {{ $empresa->nome }}
+                            @endif
+                        </a>
+                    </h4>
+                    <p>
+                        <div class="footer_social">
+                            @if($empresa)
+                                <a href="{{ $empresa->instagram }}">
+                                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </p>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h4>
+                        Horário de Funcionamento
+                    </h4>
+                    <p>
+                        @if($empresa)
+                            {{ $empresa->dias }}
+                        @endif
+                    </p>
+                    <p>
+                        @if($empresa)
+                            {{ $empresa->horario }}
+                        @endif
+                    </p>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p>
+                    <a href="#">&copy; 2023–2023 Grupo GRS Software, Inc.</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 </html>
