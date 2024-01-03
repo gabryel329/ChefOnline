@@ -4,10 +4,12 @@
 
 <style>
     .menu__item {
-        padding: 12px;
+        padding: 20px;
         color: #333;
         font-weight: 600;
+        font-size: 20px;
         transition: color 0.3s;
+        margin-bottom: 10px
     }
     .menu__item:hover {
         color: red;
@@ -28,10 +30,6 @@
     </div>
 @endif
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
-
 <section class="food_section layout_padding">
     <div class="container">
         <div class="dropdown" style="margin-top: 10px">
@@ -40,7 +38,14 @@
             </a>
 
             <ul class="dropdown-menu">
-                <li><a class="menu__item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a></li>
+                <li>
+                    <a class="menu__item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Sair') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
                 <li><a class="menu__item" href="/filtro">Relatorio</a></li>
                 <li><a class="menu__item" href="/produtos">Produtos</a></li>
                 <li><a class="menu__item" href="/tipoProd">Tipo</a></li>
