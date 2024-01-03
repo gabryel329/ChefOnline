@@ -38,7 +38,6 @@
                     <th scope="col">Telefone</th>
                     <th scope="col">Status</th>
                     <th scope="col">Pago</th>
-                    <th scope="col">Forma P.</th>
                     <th scope="col">Data/Hora</th>
                     <th scope="col">Total</th>
                 </tr>
@@ -51,7 +50,6 @@
                         <td>{{ $pedido->telefone }}</td>
                         <td>{{ $pedido->status->status }}</td>
                         <td>{{ $pedido->pago == 'S' ? 'Sim' : 'Não' }}</td>
-                        <td>{{ $pedido->formaPagamento->forma }}</td>
                         <td>{{ $pedido->created_at }}</td>
                         <td>R${{ number_format($pedido->total, 2) }}</td>
                     </tr>
