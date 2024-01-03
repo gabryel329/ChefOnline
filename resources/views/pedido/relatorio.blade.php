@@ -58,7 +58,7 @@
             <tfoot>
                 <tr>
                     <td><strong style="color: #e25a5a">Total de Pedidos: {{ $pedidos->count('id') }}</strong></td>
-                    <td colspan="6"></td>
+                    <td colspan="5"></td>
                     <td><strong style="color: #e25a5a">Total Geral: R${{ number_format($pedidos->sum('total'),2) }}</strong></td>
                 </tr>
             </tfoot>
