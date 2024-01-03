@@ -2,6 +2,7 @@
 @extends('layouts.app')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 @section('content')
 <style>
     #botao-canto-superior-direito {
@@ -75,81 +76,83 @@
                             </div>
                         </div>
                         <br>
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Codigo</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Excluir</th>
-                                    <th scope="col">Detalhes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($tipos as $tipoProd)
-
+                        <div class="table-responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <td scope="row">{{ $tipoProd->id }}</td>
-                                        <td>{{ $tipoProd->tipo }}</td>
-                                        <td>
-                                            <form action="{{ route('tipoProd.destroy', $tipoProd->id) }}" method="post"
-                                                class="ms-2">
-                                                @csrf
-                                                @method('DELETE')
+                                        <th scope="col">Codigo</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Excluir</th>
+                                        <th scope="col">Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($tipos as $tipoProd)
 
-                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                        <tr>
+                                            <td scope="row">{{ $tipoProd->id }}</td>
+                                            <td>{{ $tipoProd->tipo }}</td>
+                                            <td>
+                                                <form action="{{ route('tipoProd.destroy', $tipoProd->id) }}" method="post"
+                                                    class="ms-2">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <!-- Botão de edição que abre o modal -->
-                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{ $tipoProd->id }}">
-                                                    Editar
-                                                </button>
-                                            </div>
+                                                    <button type="submit" class="btn btn-danger">Excluir</button>
 
-                                            <!-- Modal de edição para cada investimento -->
-                                            <div class="modal fade" id="editModal{{ $tipoProd->id }}" tabindex="-1">
-                                                <div class="modal-dialog modal-sm">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Editar Tipo do Produto</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <!-- Formulário de edição para este tipoProd -->
-                                                            <form method="POST" action="{{ route('tipoProd.update', ['id' => $tipoProd->id]) }}" enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <div class="col-md-12">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                <label for="inputText">Nome</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="tipo" value="{{ $tipoProd->tipo }}">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <!-- Botão de edição que abre o modal -->
+                                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal{{ $tipoProd->id }}">
+                                                        Editar
+                                                    </button>
+                                                </div>
+
+                                                <!-- Modal de edição para cada investimento -->
+                                                <div class="modal fade" id="editModal{{ $tipoProd->id }}" tabindex="-1">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Editar Tipo do Produto</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <!-- Formulário de edição para este tipoProd -->
+                                                                <form method="POST" action="{{ route('tipoProd.update', ['id' => $tipoProd->id]) }}" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="col-md-12">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="inputText">Nome</label>
+                                                                                    <input type="text" class="form-control" id="inputText" name="tipo" value="{{ $tipoProd->tipo }}">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="submit" class="btn btn-primary">Salvar</button>
-                                                                </div>
-                                                            </form>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                                        <button type="submit" class="btn btn-primary">Salvar</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- Fim do modal de edição -->
-                                        </td>
-                                    @empty
-                                        <p class="alert-warning" style="font-size:22px; text-align:center;">Nenhum Tipo Produto Cadastrado</p>
+                                                <!-- Fim do modal de edição -->
+                                            </td>
+                                        @empty
+                                            <p class="alert-warning" style="font-size:22px; text-align:center;">Nenhum Tipo Produto Cadastrado</p>
 
-                                    </tr>
+                                        </tr>
 
-                                @endforelse
-                            </tbody>
-                        </table>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
