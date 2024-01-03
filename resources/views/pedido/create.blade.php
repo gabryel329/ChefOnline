@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
     input {
         border-radius: 10px;
@@ -90,17 +91,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 @section('content')
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div style="text-align: center" class="alert alert-warning">
-            {{ session('error') }}
-        </div>
-    @endif
+<div id="loader" style="display: none;">
+    Loading...
+</div>
 
     <section class="food_section layout_padding">
         <div class="heading_container heading_center">
@@ -317,6 +310,33 @@
                 document.getElementById("meuForm").submit();
             });
         });
+
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+        }
+
+        function hideLoader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+
+        // Your Swal script for success message
+        @if(session('success'))
+            Swal.fire({
+                title: "Camarão da Praça!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonColor: "#e25a5a"
+            });
+        @endif
+
+        // Your Swal script for error message
+        @if(session('error'))
+            Swal.fire({
+                title: "Camarão da Praça!",
+                text: "{{ session('error') }}",
+                icon: "error"
+            });
+        @endif
     </script>
 
     <!-- Carrinho de Compras -->

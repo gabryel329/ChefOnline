@@ -68,21 +68,31 @@ class PedidoController extends Controller
 
     public function processCheckout(Request $request, $pedido)
     {
-        $pedido = Pedido::findOrFail($pedido);
-        $novaDataHora = Carbon::now()->subHours(3);
-        $pedido->update([
-            'nome' => $request->nome,
-            'cpf' => $request->cpf,
-            'telefone' => $request->telefone,
-            'obs' => $request->obs,
-            'status_id' => '1',
-            'pago' => 'N',
-            'forma_pagamento_id' => $request->forma_pagamento_id,
-            'total' => $request->total,
-            'created_at' => $novaDataHora,
-        ]);
+        try {
+            echo '<script>showLoader();</script>';
 
-        return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluí­do com sucesso!');
+            $pedido = Pedido::findOrFail($pedido);
+            $novaDataHora = Carbon::now()->subHours(3);
+            $pedido->update([
+                'nome' => $request->nome,
+                'cpf' => $request->cpf,
+                'telefone' => $request->telefone,
+                'obs' => $request->obs,
+                'status_id' => '1',
+                'pago' => 'N',
+                'forma_pagamento_id' => $request->forma_pagamento_id,
+                'total' => $request->total,
+                'created_at' => $novaDataHora,
+            ]);
+
+            echo '<script>hideLoader();</script>';
+
+            return redirect()->route('pedidos.index')->with('success', 'Pedido #' . $pedido->id . ' concluí­do com sucesso!');
+        } catch (\Exception $e) {
+            // Handle exceptions
+            echo '<script>hideLoader();</script>';
+            return redirect()->back()->with('error', 'Erro ao processar o pedido.');
+        }
     }
 
     public function removeProduto(Request $request, Pedido $pedido, $produto)
