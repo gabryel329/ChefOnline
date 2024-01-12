@@ -144,7 +144,7 @@
                 message += "*Nome:* " + nome + "\n";
                 message += "*Telefone:* " + telefone;
 
-                var recipientPhoneNumber = '71993124800';
+                var recipientPhoneNumber = '@if($empresa) {{ $empresa->whats_number }} @endif';
                 var encodedMessage = encodeURIComponent(message);
                 var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
 

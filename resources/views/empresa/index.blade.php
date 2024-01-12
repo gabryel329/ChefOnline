@@ -57,13 +57,15 @@
                                                 @csrf
                                                 <div class="col-md-12">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label for="inputText">Nome</label>
                                                                 <input type="text" class="form-control" id="inputText" name="nome">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
                                                             <div class="form-group">
                                                             <label for="inputText">Imagem</label>
                                                                 <input class="form-control" type="file" name="imagem">
@@ -74,7 +76,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="inputText">Telefone</label>
-                                                                <input type="text" name="telefone" class="form-control" placeholder="(XX)XXXXX-XXXX"/>
+                                                                <input type="text" name="telefone" class="form-control" placeholder="XXXXXXXXXXX" maxlength="11"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -99,10 +101,24 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
+                                                        {{-- <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="inputText">Whatsapp</label>
+                                                                <input type="text" class="form-control" id="whats" name="whats" oninput="disableInput()" maxlength="1" placeholder="S/N">
+                                                            </div>
+                                                        </div> --}}
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="inputText">Nº Whatsapp</label>
+                                                                <input type="text" name="whats_number" id="whats_number" maxlength="11" class="form-control" placeholder="XXXXXXXXXXX"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="inputText">Instagram</label>
-                                                                <input type="text" class="form-control" id="inputText" name="instagram">
+                                                                <label for="inputText">Link Instagram</label>
+                                                                <input type="text" class="form-control" id="inputText" name="instagram" placeholder="https://www.instagram.com/username/">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -181,7 +197,9 @@
                                                                                     <input type="text" class="form-control" id="inputText" name="nome" value="{{ $empresa->nome }}">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
                                                                                 <div class="form-group">
                                                                                     <label for="inputText">Imagem</label>
                                                                                     <input type="file" class="form-control" id="inputText" name="imagem" value="{{ $empresa->imagem }}">
@@ -192,7 +210,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label for="inputText">Telefone</label>
-                                                                                    <input type="text" name="telefone" class="form-control" value="{{ $empresa->telefone }}"/>
+                                                                                    <input type="text" name="telefone" class="form-control" maxlength="11" value="{{ $empresa->telefone }}"/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -217,9 +235,23 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
+                                                                            {{-- <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="inputText">Whatsapp</label>
+                                                                                    <input type="text" class="form-control" id="inputText" maxlength="1" name="whats" value="{{ $empresa->whats }}">
+                                                                                </div>
+                                                                            </div> --}}
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="inputText">Nº Whatsapp</label>
+                                                                                    <input type="text" name="whats_number" class="form-control" maxlength="11" value="{{ $empresa->whats_number }}">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Instagram</label>
+                                                                                    <label for="inputText">Link Instagram</label>
                                                                                     <input type="text" class="form-control" id="inputText" name="instagram" value="{{ $empresa->instagram }}">
                                                                                 </div>
                                                                             </div>
@@ -288,5 +320,17 @@
         // Máscara para telefone
         $('input[name="telefone"]').inputmask("(99)99999-9999", { showMaskOnHover: false });
     });
+
+    function disableInput() {
+        var input1Value = document.getElementById('whats').value;
+        var input2Element = document.getElementById('whats_number');
+
+        // Se o valor de input1 for 'N', desabilita input2, caso contrário, habilita.
+        if (input1Value.toUpperCase() === 'N') {
+            input2Element.disabled = true;
+        } else {
+            input2Element.disabled = false;
+        }
+    }
 </script>
 @endsection

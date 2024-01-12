@@ -36,6 +36,8 @@ class EmpresaController extends Controller
         $dias = $request->input('dias');
         $horario = $request->input('horario');
         $instagram = $request->input('instagram');
+        $whats = $request->input('whats');
+        $whats_number = $request->input('whats_number');
         $imagem = $request->file('imagem');
 
         $existingEmpresa = empresa::where('nome', $nome)->first();
@@ -64,6 +66,8 @@ class EmpresaController extends Controller
                 'instagram' => $instagram,
                 'dias' => $dias,
                 'horario' => $horario,
+                'whats' => $whats,
+                'whats_number' => $whats_number,
                 'imagem' => $imageName, // Salva o nome da imagem com a extensão no banco de dados
             ]);
         } else {
@@ -74,6 +78,8 @@ class EmpresaController extends Controller
                 'email' => $email,
                 'instagram' => $instagram,
                 'dias' => $dias,
+                'whats' => $whats,
+                'whats_number' => $whats_number,
                 'horario' => $horario,
             ]);
         }
@@ -122,6 +128,8 @@ class EmpresaController extends Controller
         $empresas->instagram = $request->input('instagram');
         $empresas->email = $request->input('email');
         $empresas->dias = $request->input('dias');
+        $empresas->whats = $request->input('whats');
+        $empresas->whats_number = $request->input('whats_number');
         $empresas->horario = $request->input('horario');
 
         // Verifique se uma nova imagem foi enviada
