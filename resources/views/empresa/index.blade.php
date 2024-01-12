@@ -103,7 +103,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Whatsapp</label>
+                                                                <label for="inputText">Whatsapp (S/N)</label>
                                                                 <input type="text" class="form-control" id="whats" name="whats" oninput="disableInput()" maxlength="1" placeholder="S/N">
                                                             </div>
                                                         </div>
@@ -237,7 +237,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Whatsapp</label>
+                                                                                    <label for="inputText">Whatsapp (S/N)</label>
                                                                                     <input type="text" class="form-control" id="inputText" maxlength="1" name="whats" value="{{ $empresa->whats }}">
                                                                                 </div>
                                                                             </div>
