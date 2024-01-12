@@ -101,12 +101,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        {{-- <div class="col-md-6">
+                                                        <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="inputText">Whatsapp</label>
                                                                 <input type="text" class="form-control" id="whats" name="whats" oninput="disableInput()" maxlength="1" placeholder="S/N">
                                                             </div>
-                                                        </div> --}}
+                                                        </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="inputText">Nº Whatsapp</label>
@@ -235,12 +235,12 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            {{-- <div class="col-md-6">
+                                                                            <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label for="inputText">Whatsapp</label>
                                                                                     <input type="text" class="form-control" id="inputText" maxlength="1" name="whats" value="{{ $empresa->whats }}">
                                                                                 </div>
-                                                                            </div> --}}
+                                                                            </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label for="inputText">Nº Whatsapp</label>

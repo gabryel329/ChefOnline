@@ -118,48 +118,55 @@
         $('#finalizarButton').on('click', function() {
             var nome = $('input[name="nome"]').val();
             var telefone = $('input[name="telefone"]').val();
-            // var cpf = $('input[name="cpf"]').val();
             var obs = $('textarea[name="obs"]').val();
             var formaPagamento = $('select[name="forma_pagamento_id"] option:selected').text();
 
-            if (nome && telefone) {
-                var message = "*Camarão da Praça*\n\n";
-                message += "Olá, segue pedido *#" + $('#id').val() + "*\n\n";
+            // Condição para verificar se a função do WhatsApp deve ser desabilitada
+            @if($empresa && $empresa->whats == 'N')
+                // Se WhatsApp desabilitado, envia o formulário diretamente
+                form.submit();
+            @else
+                if (nome && telefone) {
+                    var message = "*Camarão da Praça*\n\n";
+                    message += "Olá, segue pedido *#" + $('#id').val() + "*\n\n";
 
-                // Construa a parte da mensagem com detalhes dos produtos aqui
-                var produtosInfo = "*Produtos*:\n";
-                $('.order-table tbody tr').each(function() {
-                    var nomeProduto = $(this).find('strong').text();
-                    var quantidade = $(this).find('span[id="qtd"]').text().split(": ")[1];
-                    var subtotal = $(this).find('.thin.small').text();
+                    // Construa a parte da mensagem com detalhes dos produtos aqui
+                    var produtosInfo = "*Produtos*:\n";
+                    $('.order-table tbody tr').each(function() {
+                        var nomeProduto = $(this).find('strong').text();
+                        var quantidade = $(this).find('span[id="qtd"]').text().split(": ")[1];
+                        var subtotal = $(this).find('.thin.small').text();
 
-                    produtosInfo += nomeProduto + "\nQuantidade: " + quantidade + "\n" + subtotal + "\n\n";
-                });
+                        produtosInfo += nomeProduto + "\nQuantidade: " + quantidade + "\n" + subtotal + "\n\n";
+                    });
 
-                message += produtosInfo;
-                message += "*Total:* " + $('#total').text() + "\n";
-                message += "*Forma de Pagamento:* " + formaPagamento + "\n\n";
-                message += "*ENTREGA:*\n";
-                message += obs + "\n\n";
-                message += "*Nome:* " + nome + "\n";
-                message += "*Telefone:* " + telefone;
+                    message += produtosInfo;
+                    message += "*Total:* " + $('#total').text() + "\n";
+                    message += "*Forma de Pagamento:* " + formaPagamento + "\n\n";
+                    message += "*ENTREGA:*\n";
+                    message += obs + "\n\n";
+                    message += "*Nome:* " + nome + "\n";
+                    message += "*Telefone:* " + telefone;
 
-                var recipientPhoneNumber = '@if($empresa) {{ $empresa->whats_number }} @endif';
-                var encodedMessage = encodeURIComponent(message);
-                var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
+                    var recipientPhoneNumber = @if($empresa) {{ $empresa->telefone }} @endif;
+                    var encodedMessage = encodeURIComponent(message);
+                    var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
 
-                // Abra o WhatsApp em uma nova aba
-                window.open(whatsappURL, '_blank');
+                    // Abra o WhatsApp em uma nova aba
+                    window.open(whatsappURL, '_blank');
 
-                // Aguarde um segundo e depois envie o formulário
-                setTimeout(function() {
-                    form.submit();
-                }, 1000);
-            } else {
-                alert('Preencha todos os campos antes de finalizar o pedido.');
-            }
+                    // Aguarde um segundo e depois envie o formulário
+                    setTimeout(function() {
+                        form.submit();
+                    }, 1000);
+                } else {
+                    alert('Preencha todos os campos antes de finalizar o pedido.');
+                }
+            @endif
         });
     });
+
+
 
     $(document).ready(function() {
         // Máscara para CPF
