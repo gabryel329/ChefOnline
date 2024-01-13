@@ -148,7 +148,7 @@
                     message += "*Nome:* " + nome + "\n";
                     message += "*Telefone:* " + telefone;
 
-                    var recipientPhoneNumber = @if($empresa) {{ $empresa->telefone }} @endif;
+                    var recipientPhoneNumber = @if($empresa) {{ $empresa->whats_number }} @endif;
                     var encodedMessage = encodeURIComponent(message);
                     var whatsappURL = 'https://api.whatsapp.com/send?phone=' + recipientPhoneNumber + '&text=' + encodedMessage;
 
