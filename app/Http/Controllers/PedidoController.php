@@ -175,7 +175,7 @@ class PedidoController extends Controller
             'N' => 'Não',
         ];
 
-        $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal])->whereNotNull('nome');
+        $query = Pedido::whereBetween('created_at', [$dataInicial, $dataFinal])->whereNotNull('nome')->orderBy('id', 'asc');
 
         // Adicione a condição para o filtro de status, se fornecido
         if ($status) {
