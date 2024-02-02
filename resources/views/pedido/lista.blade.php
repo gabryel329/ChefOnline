@@ -198,7 +198,8 @@
                                     <li>${produto.nome} - Quantidade: ${produto.pivot.quantidade}</li>
                                 `).join('')}
                                 ${pedido.forma_pagamento_id ? `<li>Forma Pagamento:<strong> ${formasPagamento[pedido.forma_pagamento_id]}</strong></li>` : ''}
-                                <li><strong style="color: red">Total: R$${pedido.total},00</strong></li>
+                                <li><strong style="color: red">Total: R$${Number(pedido.total).toFixed(2)}</strong></li>
+
                             </ul>
                             ${pedido.obs ? `Observação:<p class="card-text"><small class="text-muted">${pedido.obs}</small></p>` : ''}
                         </div>

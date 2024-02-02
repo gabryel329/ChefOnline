@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 @section('content')
 <style>
@@ -59,15 +59,15 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="inputText">Nome</label>
-                                                                <input type="text" class="form-control" id="inputText" name="nome">
+                                                                <label for="">Nome</label>
+                                                                <input type="text" class="form-control" id="" name="nome">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                            <label for="inputText">Imagem</label>
+                                                            <label for="">Imagem</label>
                                                                 <input class="form-control" type="file" name="imagem">
                                                             </div>
                                                         </div>
@@ -75,41 +75,41 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Telefone</label>
+                                                                <label for="">Telefone</label>
                                                                 <input type="text" name="telefone" class="form-control" placeholder="XXXXXXXXXXX" maxlength="11"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                            <label for="inputText">E-mail</label>
-                                                            <input type="email" class="form-control" id="inputText" name="email">
+                                                            <label for="">E-mail</label>
+                                                            <input type="email" class="form-control" id="" name="email">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Dias de Funcionamento</label>
-                                                                <input type="text" class="form-control" id="inputText" name="dias" placeholder="Quinta á Domingo">
+                                                                <label for="">Dias de Funcionamento</label>
+                                                                <input type="text" class="form-control" id="" name="dias" placeholder="Quinta á Domingo">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                            <label for="inputText">Horário de Funcionamento</label>
-                                                            <input type="text" class="form-control" id="inputText" name="horario" placeholder="18h ás 23:30h">
+                                                            <label for="">Horário de Funcionamento</label>
+                                                            <input type="text" class="form-control" id="" name="horario" placeholder="18h ás 23:30h">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Whatsapp (S/N)</label>
+                                                                <label for="">Whatsapp (S/N)</label>
                                                                 <input type="text" class="form-control" id="whats" name="whats" oninput="disableInput()" maxlength="1" placeholder="S/N">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Nº Whatsapp</label>
+                                                                <label for="">Nº Whatsapp</label>
                                                                 <input type="text" name="whats_number" id="whats_number" maxlength="11" class="form-control" placeholder="XXXXXXXXXXX"/>
                                                             </div>
                                                         </div>
@@ -117,8 +117,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="inputText">Link Instagram</label>
-                                                                <input type="text" class="form-control" id="inputText" name="instagram" placeholder="https://www.instagram.com/username/">
+                                                                <label for="">Link Instagram</label>
+                                                                <input type="text" class="form-control" id="" name="instagram" placeholder="https://www.instagram.com/username/">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -193,57 +193,57 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Nome</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="nome" value="{{ $empresa->nome }}">
+                                                                                    <label for="">Nome</label>
+                                                                                    <input type="text" class="form-control" id="" name="nome" value="{{ $empresa->nome }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Imagem</label>
-                                                                                    <input type="file" class="form-control" id="inputText" name="imagem" value="{{ $empresa->imagem }}">
+                                                                                    <label for="">Imagem</label>
+                                                                                    <input type="file" class="form-control" id="" name="imagem" value="{{ $empresa->imagem }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Telefone</label>
+                                                                                    <label for="">Telefone</label>
                                                                                     <input type="text" name="telefone" class="form-control" maxlength="11" value="{{ $empresa->telefone }}"/>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                <label for="inputText">E-mail</label>
-                                                                                <input type="email" class="form-control" id="inputText" name="email" value="{{ $empresa->email }}">
+                                                                                <label for="">E-mail</label>
+                                                                                <input type="email" class="form-control" id="" name="email" value="{{ $empresa->email }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Dias de Funcionamento</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="dias" value="{{ $empresa->dias }}">
+                                                                                    <label for="">Dias de Funcionamento</label>
+                                                                                    <input type="text" class="form-control" id="" name="dias" value="{{ $empresa->dias }}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                <label for="inputText">Horário de Funcionamento</label>
-                                                                                <input type="text" class="form-control" id="inputText" name="horario" value="{{ $empresa->horario }}">
+                                                                                <label for="">Horário de Funcionamento</label>
+                                                                                <input type="text" class="form-control" id="" name="horario" value="{{ $empresa->horario }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Whatsapp (S/N)</label>
-                                                                                    <input type="text" class="form-control" id="inputText" maxlength="1" name="whats" value="{{ $empresa->whats }}">
+                                                                                    <label for="">Whatsapp (S/N)</label>
+                                                                                    <input type="text" class="form-control" id="" maxlength="1" name="whats" value="{{ $empresa->whats }}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Nº Whatsapp</label>
+                                                                                    <label for="">Nº Whatsapp</label>
                                                                                     <input type="text" name="whats_number" class="form-control" maxlength="11" value="{{ $empresa->whats_number }}">
                                                                                 </div>
                                                                             </div>
@@ -251,8 +251,8 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Link Instagram</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="instagram" value="{{ $empresa->instagram }}">
+                                                                                    <label for="">Link Instagram</label>
+                                                                                    <input type="text" class="form-control" id="" name="instagram" value="{{ $empresa->instagram }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>

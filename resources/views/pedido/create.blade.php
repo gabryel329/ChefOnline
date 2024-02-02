@@ -108,9 +108,6 @@
             @endif
         </div>
 
-        <div class="col-mt-2">
-            <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button" disabled>AVANÇAR</button>
-        </div>
         <ul class="filters_menu">
             <li class="active" data-filter="*">Todos</li>
             @foreach ($tipos as $tipo)
@@ -342,6 +339,9 @@
     <!-- Carrinho de Compras -->
     <div id="cart">
         <i class="fas fa-shopping-cart"></i>
+        <div class="col-mt-2">
+            <button id="botaoEnviar" class="btn btn-danger btn-block" id="avancar-button" disabled>AVANÇAR</button>
+        </div>
         <div class="cart-header">
             <ul id="cart-items">
             </ul>

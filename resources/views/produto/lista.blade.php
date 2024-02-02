@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     #botao-canto-superior-direito {
@@ -60,13 +60,13 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Nome</label>
-                                                                <input type="text" class="form-control" id="inputText" name="nome">
+                                                                <label for="">Nome</label>
+                                                                <input type="text" class="form-control" id="" name="nome">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Tipo</label>
+                                                                <label for="">Tipo</label>
                                                                 <select class="form-control" id="tipo" name="tipo">
                                                                     <option disabled selected required>Escolha
                                                                     </option>
@@ -79,7 +79,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="inputText">Preço</label>
+                                                                <label for="">Preço</label>
                                                                 <div class="input-group mb-3">
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">R$</span>
@@ -90,7 +90,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                            <label for="inputText">Imagem</label>
+                                                            <label for="">Imagem</label>
                                                                 <input class="form-control" type="file" name="imagem">
                                                             </div>
                                                         </div>
@@ -98,8 +98,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="inputText">Descrição</label>
-                                                                <input type="text" class="form-control" id="inputText" name="descricao">
+                                                                <label for="">Descrição</label>
+                                                                <input type="text" class="form-control" id="" name="descricao">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,21 +172,21 @@
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Nome</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="nome" value="{{ $produto->nome }}">
+                                                                                    <label for="">Nome</label>
+                                                                                    <input type="text" class="form-control" id="" name="nome" value="{{ $produto->nome }}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Tipo</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="tipo" value="{{ $produto->tipo }}">
+                                                                                    <label for="">Tipo</label>
+                                                                                    <input type="text" class="form-control" id="" name="tipo" value="{{ $produto->tipo }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Preço</label>
+                                                                                    <label for="">Preço</label>
                                                                                     <div class="input-group mb-3">
                                                                                         <div class="input-group-prepend">
                                                                                             <span class="input-group-text">R$</span>
@@ -197,22 +197,22 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Imagem</label>
-                                                                                    <input type="file" class="form-control" id="inputText" name="imagem" value="{{ $produto->imagem }}">
+                                                                                    <label for="">Imagem</label>
+                                                                                    <input type="file" class="form-control" id="" name="imagem" value="{{ $produto->imagem }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-8">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Descrição</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="descricao" value="{{ $produto->descricao }}">
+                                                                                    <label for="">Descrição</label>
+                                                                                    <input type="text" class="form-control" id="" name="descricao" value="{{ $produto->descricao }}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label for="inputText">Estoque (S/N)</label>
-                                                                                    <input type="text" class="form-control" id="inputText" name="mostrar" value="{{ $produto->mostrar }}">
+                                                                                    <label for="">Estoque (S/N)</label>
+                                                                                    <input type="text" class="form-control" id="" name="mostrar" value="{{ $produto->mostrar }}">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
