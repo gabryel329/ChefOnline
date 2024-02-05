@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\TipoProdController;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [PedidoController::class, 'index'])->name('pedidos.index');
+Route::get('/criar', [PedidoProdutoController::class, 'index'])->name('pedidos.index');
 Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
 
     #Pedido
@@ -61,6 +63,12 @@ Route::post('/pedido/store', [PedidoController::class, 'store'])->name('pedidos.
 Route::get('/pedido/checkout/{pedido}', [PedidoController::class, 'showCheckoutForm'])->name('pedido.checkout');
 Route::post('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheckout'])->name('pedido.processCheckout');
 Route::delete('/pedido/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
+
+#Processo Checkout SEM WHATSAPP
+Route::post('/pedidos/store', [PedidoProdutoController::class, 'store'])->name('pedido.store');
+Route::get('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'showCheckoutForm'])->name('pedidos.checkout');
+Route::post('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'processCheckout'])->name('pedidos.processCheckout');
+Route::delete('/pedidos/{pedido}/produtos/{produto}', [PedidoProdutoController::class, 'removeProduto'])->name('pedidos.removeProduto');
 
 
 
