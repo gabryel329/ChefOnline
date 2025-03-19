@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Client',
             'tipo' => 'Client',
-            'email' => 'clientes@lista.com',
-            'password' => bcrypt('12345678'),
+            'email' => 'adriana@drigasbuffet.com',
+            'password' => bcrypt('741474'),
         ]);
 
         //STATUS
@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
 
         //Empresa
         DB::table('empresas')->insert([
-            'nome' => 'Camarão da Praça',
+            'nome' => 'Drigas Buffet',
             'imagem' => 'images/logo2.png',
         ]);
 
