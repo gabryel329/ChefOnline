@@ -278,11 +278,11 @@
     });
 
     // Função para atualizar a página a cada 30 segundos
-    function atualizarPagina() {
-        setTimeout(function() {
-            location.reload(); // Recarrega a página
-        }, 60000); // 30 segundos em milissegundos
-    }
+    // function atualizarPagina() {
+    //     setTimeout(function() {
+    //         location.reload(); // Recarrega a página
+    //     }, 60000); // 30 segundos em milissegundos
+    // }
 
     // Chama a função na carga inicial da página
     atualizarPagina();
