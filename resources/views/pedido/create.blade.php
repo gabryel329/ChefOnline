@@ -133,7 +133,7 @@
                                         <div class="row">
                                             <div class="col-12" style="align-items: center">
                                                 <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
-                                                <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" readonly="" value="0">
+                                                <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                                 <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button>
                                                 <input type="hidden" id="prod{{ $produto->id }}" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                                             </div>
@@ -283,6 +283,13 @@
                 const cartTotalElement = document.getElementById('cart-total');
                 cartTotalElement.innerText = total.toFixed(2);
             }
+
+            // Adicionar evento de input para atualizar o carrinho quando o valor for digitado
+            qtyInputs.forEach((input, index) => {
+                input.addEventListener('input', () => {
+                    updateCart(index);
+                });
+            });
 
 
             function habilitarBotaoAvancar() {
