@@ -35,7 +35,7 @@ class ProdutoController extends Controller
         $descricao = $request->input('descricao');
         $imagem = $request->file('imagem');
 
-        $existingProduto = Produto::where('nome', $nome)->first();
+        $existingProduto = Produto::where(['nome' => $nome, 'tipo' => $tipo])->first();
 
         if ($existingProduto) {
             return redirect()->route('produtos.index')->with('error', 'Nome de Produto já existe');
