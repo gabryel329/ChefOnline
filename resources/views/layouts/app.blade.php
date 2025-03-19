@@ -69,8 +69,72 @@
             <!-- nice select -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
             <!-- custom js -->
-            <script src="{{ asset('js/custom.js') }}"></script></script>
+            <script>
+                function toggleDivs() {
+                    var freteSim = document.querySelector('input[name="frete"][value="S"]:checked');
+                    var freteNao = document.querySelector('input[name="frete"][value="N"]:checked');
+                    
+                    var obsDiv = document.querySelector('.obsDiv');
+                    var fretDiv = document.querySelector('.fretDiv');
+                    var bairroDiv = document.querySelector('.bairroDiv');
+                    
+                    if (freteSim) {
+                        obsDiv.style.display = 'none';
+                        bairroDiv.style.display = 'block';
+                        fretDiv.style.display = 'block';
+                    } else if (freteNao) {
+                        fretDiv.style.display = 'none';
+                        bairroDiv.style.display = 'none';
+                        obsDiv.style.display = 'block';
+                    }
+                }
 
+                // Evento de 'blur' no campo CEP para preenchimento automático
+                document.getElementById('cep').addEventListener('blur', function() {
+                    let cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+                    if (cep.length !== 8) {
+                        alert("Digite um CEP válido com 8 dígitos!");
+                        return;
+                    }
+
+                    // URL da API ViaCEP
+                    let url = `https://viacep.com.br/ws/${cep}/json/`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.erro) {
+                                alert("CEP não encontrado.");
+                                return;
+                            }
+
+                            // Preencher os campos automaticamente
+                            document.getElementById('logradouro').value = data.logradouro || '';
+                            document.getElementById('bairro').value = data.bairro || '';
+                            document.getElementById('cidade').value = data.localidade || '';
+                            document.getElementById('estado').value = data.uf || '';
+                        })
+                        .catch(error => console.error('Erro ao buscar CEP:', error));
+                });
+
+                
+                function formatDateBR(data) {
+                    // Extrai a data e a hora do valor
+                    var partes = data.split('T');
+                    var dataParte = partes[0]; // "2025-03-21"
+                    var horaParte = partes[1]; // "16:03"
+
+                    // Separa a data para pegar o dia, mês e ano
+                    var dataArray = dataParte.split('-');
+                    var dia = dataArray[2];
+                    var mes = dataArray[1];
+                    var ano = dataArray[0];
+
+                    // Retorna no formato BR (dd/mm/yyyy - hh:mm)
+                    return dia + '/' + mes + '/' + ano + ' - ' + horaParte;
+                }
+            </script>
             @stack('scripts')
         </div>
     </body>

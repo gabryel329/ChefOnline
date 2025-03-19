@@ -49,6 +49,7 @@
                 <li><a class="menu__item" href="/filtro">Relatorio</a></li>
                 <li><a class="menu__item" href="/produtos">Produtos</a></li>
                 <li><a class="menu__item" href="/tipoProd">Tipo</a></li>
+                <li><a class="menu__item" href="/Frete">Frete</a></li>
                 <li><a class="menu__item" href="/Empresa">Empresa</a></li>
             </ul>
         </div>

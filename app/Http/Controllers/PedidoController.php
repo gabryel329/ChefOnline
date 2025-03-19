@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormaPagamento;
+use App\Models\Frete;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\Status;
@@ -60,10 +61,11 @@ class PedidoController extends Controller
         $empresa = \App\Models\empresa::first();
         $pedido = Pedido::findOrFail($pedido);
         $formasPagamento = FormaPagamento::all();
+        $fretes = Frete::all();
         $produtos = $pedido->produtos;
         $total = $pedido->total;
 
-        return view('pedido.checkout', compact('pedido', 'formasPagamento', 'produtos', 'total', 'empresa'));
+        return view('pedido.checkout', compact('pedido','fretes', 'formasPagamento', 'produtos', 'total', 'empresa'));
     }
 
     public function processCheckout(Request $request, $pedido)
@@ -73,6 +75,7 @@ class PedidoController extends Controller
 
             $pedido = Pedido::findOrFail($pedido);
             $novaDataHora = Carbon::now()->subHours(3);
+            $valorTotal = $request->total + $request->valor_frete;
             $pedido->update([
                 'nome' => $request->nome,
                 'cpf' => $request->cpf,
@@ -81,8 +84,17 @@ class PedidoController extends Controller
                 'status_id' => '1',
                 'pago' => 'N',
                 'forma_pagamento_id' => $request->forma_pagamento_id,
-                'total' => $request->total,
+                'total' => $valorTotal,
                 'created_at' => $novaDataHora,
+                'cep' => $request->cep,
+                'logradouro' => $request->logradouro,
+                'bairro' => $request->bairro,
+                'cidade' => $request->cidade,
+                'estado' => $request->estado,
+                'numero' => $request->numero,
+                'complemento' => $request->complemento,
+                'frete' => $request->frete,
+                'valor_frete' => $request->valor_frete,
             ]);
 
             echo '<script>hideLoader();</script>';

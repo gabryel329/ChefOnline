@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\FreteController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [PedidoController::class, 'index'])->name('pedidos.index');
-Route::get('/criar', [PedidoProdutoController::class, 'index'])->name('pedidos.index');
+//Route::get('/criar', [PedidoProdutoController::class, 'index'])->name('pedidos.index');
 Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
 
     #Pedido
@@ -56,6 +57,13 @@ Route::middleware(['auth', 'checkUserRole:Client'])->group(function () {
     Route::post('Empresa', [EmpresaController::class, 'store'])->name('empresa.store');
     Route::put('Empresa/{id}', [EmpresaController::class, 'update'])->name('empresa.update');
     Route::delete('Empresa/{id}', [EmpresaController::class, 'destroy'])->name('empresa.destroy');
+
+    #frete
+    Route::get('Frete', [FreteController::class, 'index'])->name('frete.index');
+    Route::get('Frete/{id}', [FreteController::class, 'show'])->name('frete.show');
+    Route::post('Frete', [FreteController::class, 'store'])->name('frete.store');
+    Route::put('Frete/{id}', [FreteController::class, 'update'])->name('frete.update');
+    Route::delete('Frete/{id}', [FreteController::class, 'destroy'])->name('frete.destroy');
 });
 
 #Processo Checkout
@@ -65,10 +73,10 @@ Route::post('/pedido/checkout/{pedido}', [PedidoController::class, 'processCheck
 Route::delete('/pedido/{pedido}/produtos/{produto}', [PedidoController::class, 'removeProduto'])->name('pedido.removeProduto');
 
 #Processo Checkout SEM WHATSAPP
-Route::post('/pedidos/store', [PedidoProdutoController::class, 'store'])->name('pedido.store');
-Route::get('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'showCheckoutForm'])->name('pedidos.checkout');
-Route::post('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'processCheckout'])->name('pedidos.processCheckout');
-Route::delete('/pedidos/{pedido}/produtos/{produto}', [PedidoProdutoController::class, 'removeProduto'])->name('pedidos.removeProduto');
+// Route::post('/pedidos/store', [PedidoProdutoController::class, 'store'])->name('pedido.store');
+// Route::get('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'showCheckoutForm'])->name('pedidos.checkout');
+// Route::post('/pedidos/checkout/{pedido}', [PedidoProdutoController::class, 'processCheckout'])->name('pedidos.processCheckout');
+// Route::delete('/pedidos/{pedido}/produtos/{produto}', [PedidoProdutoController::class, 'removeProduto'])->name('pedidos.removeProduto');
 
 
 

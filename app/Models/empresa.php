@@ -11,7 +11,7 @@ class empresa extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'empresas';
-    protected $fillable = ['nome', 'imagem', 'instagram', 'email', 'telefone', 'dias', 'horario'];
+    protected $fillable = ['nome', 'imagem', 'instagram', 'email', 'telefone', 'dias', 'horario', 'whats', 'whats_number'];
     protected $dates = ['deleted_at'];
 
 }
