@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\tipoProd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,8 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-        return view('produto.lista', compact('produtos'));
+        $tipoProd = tipoProd::all();
+        return view('produto.lista', compact('produtos', 'tipoProd'));
     }
 
     /**
