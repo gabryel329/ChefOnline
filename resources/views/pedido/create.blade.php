@@ -116,34 +116,39 @@
         </ul>
         <div class="filters-content">
             <form id="meuForm" action="{{ route('pedidos.store') }}" method="POST">
-                @csrf
-                <div class="row grid">
-                    @foreach($produtos as $produto)
-                        <div class="col-sm-3 filter-item" data-tipo="{{ $produto->tipo }}" data-preco="{{ $produto->preco }}">
-                            <div class="box">
-                                <div>
-                                    <div class="img-box">
-                                        <img style="border-radius: 10px" src="{{ asset('images/' . $produto->imagem) }}" alt="{{ $produto->nome }}">
-                                    </div>
-                                    <div class="detail-box">
-                                        <h5>{{ $produto->nome }}</h5>
-                                        <div class="options">
-                                            <h6>R${{ $produto->preco }} - <small>{{ $produto->descricao }}</small></h6>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12" style="align-items: center">
-                                                <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
-                                                <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                                                <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button>
-                                                <input type="hidden" id="prod{{ $produto->id }}" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            @csrf
+            <div class="row">
+                <div class="col-12">
+                <input type="text" id="searchInput" class="form-control" placeholder="Buscar produto...">
+                </div>
+            </div>
+            <div class="row grid" id="productGrid">
+                @foreach($produtos as $produto)
+                <div class="col-sm-3 filter-item" data-tipo="{{ $produto->tipo }}" data-preco="{{ $produto->preco }}" data-nome="{{ strtolower($produto->nome) }}">
+                    <div class="box">
+                    <div>
+                        <div class="img-box">
+                        <img style="border-radius: 10px" src="{{ asset('images/' . $produto->imagem) }}" alt="{{ $produto->nome }}">
+                        </div>
+                        <div class="detail-box">
+                        <h5>{{ $produto->nome }}</h5>
+                        <div class="options">
+                            <h6>R${{ $produto->preco }} - <small>{{ $produto->descricao }}</small></h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-12" style="align-items: center">
+                            <button type="button" onclick="qtdporcao({{ $produto->id }},0)" class="sub btn btn-danger"><strong>-</strong></button>
+                            <input type="text" id="qtd{{ $produto->id }}" class="qtyBox" name="produtos[{{ $produto->id }}][quantidade]" value="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                            <button type="button" onclick="qtdporcao({{ $produto->id }},1)" class="add btn btn-success"><strong>+</strong></button>
+                            <input type="hidden" id="prod{{ $produto->id }}" name="produtos[{{ $produto->id }}][id]" value="{{ $produto->id }}">
                             </div>
                         </div>
-                    @endforeach
+                        </div>
+                    </div>
+                    </div>
                 </div>
+                @endforeach
+            </div>
             </form>
         </div>
     </section>
@@ -341,6 +346,21 @@
                 icon: "error"
             });
         @endif
+
+        
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var searchValue = this.value.toLowerCase();
+            var productItems = document.querySelectorAll('.filter-item');
+
+            productItems.forEach(function(item) {
+                var productName = item.getAttribute('data-nome');
+                if (productName.includes(searchValue)) {
+                item.style.display = 'block';
+                } else {
+                item.style.display = 'none';
+                }
+            });
+        });
     </script>
 
     <!-- Carrinho de Compras -->
