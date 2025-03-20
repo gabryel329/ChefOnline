@@ -32,27 +32,48 @@
 
 <section class="food_section layout_padding">
     <div class="container">
-        <div class="dropdown" style="margin-top: 10px">
+        <div class="dropdown mt-3">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Menu
             </a>
-
             <ul class="dropdown-menu">
+                <!-- Logout Item -->
                 <li>
-                    <a class="menu__item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Sair') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </li>
-                <li><a class="menu__item" href="/filtro">Relatorio</a></li>
-                <li><a class="menu__item" href="/produtos">Produtos</a></li>
-                <li><a class="menu__item" href="/tipoProd">Tipo</a></li>
-                <li><a class="menu__item" href="/Frete">Frete</a></li>
-                <li><a class="menu__item" href="/Empresa">Empresa</a></li>
+        
+                <!-- Divider after Logout -->
+                <li><hr class="dropdown-divider"></li>
+        
+                <!-- Other Menu Items Group 1 -->
+                <li><a class="dropdown-item" href="/filtro">Relatório</a></li>
+                <!-- Divider between groups -->
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/produtos">Produtos</a></li>
+                <!-- Divider between groups -->
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/tipoProd">Tipo</a></li>
+        
+                <!-- Divider between groups -->
+                <li><hr class="dropdown-divider"></li>
+        
+                <!-- Other Menu Items Group 2 -->
+                <li><a class="dropdown-item" href="/Frete">Frete</a></li>
+                <!-- Divider between groups -->
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/Empresa">Empresa</a></li>
+        
+                <!-- Additional Divider at the bottom for extra space -->
+                <li><hr class="dropdown-divider"></li>
             </ul>
         </div>
+        
+        
         <div class="heading_container heading_center">
             @php
                 $empresa = \App\Models\empresa::first();
